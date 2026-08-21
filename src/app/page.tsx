@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const services = [
   ["01", "Private lessons", "One-on-one coaching for dancers who want focused support, confident basics, and a clear next step."],
   ["02", "Tricks & technique", "Targeted coaching to build stronger foundations, sharper skills, and cleaner execution."],
@@ -11,7 +13,7 @@ export default function Home() {
         <nav className="nav" aria-label="Main navigation">
           <a className="brand" href="#top">faith<span>.</span></a>
           <div className="nav-links">
-            <a href="#about">About</a><a href="#lessons">Lessons</a><a href="#gallery">Gallery</a><a href="#contact">Tutorials</a>
+            <a href="#about">About</a><a href="#lessons">Lessons</a><a href="#gallery">Gallery</a><Link href="/membership">Membership</Link>
           </div>
           <a className="nav-button" href="#contact">Inquire</a>
         </nav>
@@ -20,7 +22,7 @@ export default function Home() {
             <p className="eyebrow">Private dance coaching</p>
             <h1>Find your <em>freedom</em> in motion.</h1>
             <p className="intro">Thoughtful, one-on-one dance coaching that helps every dancer feel capable, grounded, and confident.</p>
-            <div className="actions"><a className="button" href="#contact">Book a lesson <span>→</span></a><a className="text-link" href="#about">Meet Faith</a></div>
+            <div className="actions"><a className="button" href="#contact">Book a lesson <span>→</span></a><Link className="text-link" href="/membership">Explore membership</Link></div>
           </div>
           <div className="portrait portrait-main"><span>Faith&apos;s hero photo</span></div>
         </div>
