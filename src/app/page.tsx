@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const services = [
   ["01", "Private lessons", "One-on-one coaching for dancers who want focused support, confident basics, and a clear next step."],
@@ -11,7 +12,7 @@ export default function Home() {
     <main>
       <section className="hero" id="top">
         <nav className="nav" aria-label="Main navigation">
-          <a className="brand" href="#top">faith<span>.</span></a>
+          <a className="brand" href="#top">Faith.In.Dance.</a>
           <div className="nav-links">
             <a href="#about">About</a><a href="#lessons">Lessons</a><a href="#gallery">Gallery</a><Link href="/membership">Membership</Link>
           </div>
@@ -24,7 +25,11 @@ export default function Home() {
             <p className="intro">Thoughtful, one-on-one dance coaching that helps every dancer feel capable, grounded, and confident.</p>
             <div className="actions"><a className="button" href="#contact">Book a lesson <span>→</span></a><Link className="text-link" href="/membership">Explore membership</Link></div>
           </div>
-          <div className="portrait portrait-main"><span>Faith&apos;s hero photo</span></div>
+          <div className="hero-photo-stack" aria-label="Faith's dance journey">
+            <div className="hero-photo hero-photo-baby"><Image src="/images/faith-baby.jpeg" alt="Faith as a young dancer" fill sizes="(max-width: 720px) 38vw, 220px" priority /></div>
+            <div className="hero-photo hero-photo-pose"><Image src="/images/faith-dance-pose.jpeg" alt="Faith performing a dance pose on stage" fill sizes="(max-width: 720px) 68vw, 410px" priority /></div>
+            <div className="hero-photo hero-photo-cheer"><Image src="/images/faith-cheerleading.jpg" alt="Faith cheering professionally" fill sizes="(max-width: 720px) 35vw, 210px" priority /></div>
+          </div>
         </div>
       </section>
 
@@ -55,7 +60,7 @@ export default function Home() {
         <div><p className="eyebrow">Let&apos;s dance</p><h2>Ready to take<br />the <em>next step?</em></h2><p>Tell Faith a little about your dancer and the support you&apos;re looking for. She&apos;ll be in touch with next steps.</p></div>
         <form className="inquiry-form"><label>Parent / dancer name<input placeholder="Your name" /></label><label>Email<input type="email" placeholder="you@example.com" /></label><label>What would you like help with?<select defaultValue=""><option value="" disabled>Select a lesson focus</option><option>Private lessons</option><option>Tricks & technique</option><option>Performance prep</option></select></label><button type="button" className="button">Join the lesson list <span>→</span></button><small>A real booking form will be connected here.</small></form>
       </section>
-      <footer><a className="brand" href="#top">faith<span>.</span></a><span>Dance with confidence.</span><span>© 2026 Faith Dance</span></footer>
+      <footer><a className="brand" href="#top">Faith.In.Dance.</a><span>Dance with confidence.</span><span>© 2026 Faith.In.Dance.</span></footer>
     </main>
   );
 }
