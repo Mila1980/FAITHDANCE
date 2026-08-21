@@ -14,16 +14,16 @@ export default function Home() {
         <nav className="nav" aria-label="Main navigation">
           <a className="brand" href="#top">Faith.In.Dance.</a>
           <div className="nav-links">
-            <Link href="/about">About</Link><a href="#lessons">Lessons</a><Link href="/membership">Membership</Link>
+            <Link href="/about">About</Link><a href="#lessons">Lessons</a><Link href="/membership">Membership</Link><Link href="/book">Book</Link>
           </div>
-          <a className="nav-button" href="#contact">Inquire</a>
+          <Link className="nav-button" href="/book">Book now</Link>
         </nav>
         <div className="hero-grid">
           <div className="hero-copy">
             <p className="eyebrow">Private Zoom dance coaching</p>
             <h1>Find your <em>freedom</em> in motion.</h1>
             <p className="intro">Thoughtful, one-on-one Zoom coaching that helps every dancer feel capable, grounded, and confident—wherever they are.</p>
-            <div className="actions"><a className="button" href="#contact">Book a Zoom lesson <span>→</span></a><Link className="text-link" href="/membership">Explore membership</Link></div>
+            <div className="actions"><Link className="button" href="/book">Book a Zoom lesson <span>→</span></Link><Link className="text-link" href="/membership">Explore membership</Link></div>
           </div>
           <div className="hero-photo-stack" aria-label="Faith's dance journey">
             <div className="hero-photo hero-photo-baby"><Image src="/images/faith-baby.jpeg" alt="Faith as a young dancer" fill sizes="(max-width: 720px) 38vw, 220px" priority /></div>
