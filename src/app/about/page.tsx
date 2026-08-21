@@ -1,0 +1,12 @@
+import Image from "next/image";
+import Link from "next/link";
+
+export default function AboutPage() {
+  return <main className="about-page">
+    <nav className="member-nav"><Link className="brand" href="/">Faith.In.Dance.</Link><div><Link href="/">Home</Link><Link href="/membership">Membership</Link><a href="#story">Faith&apos;s story</a></div><Link className="nav-button" href="/#contact">Inquire</Link></nav>
+    <section className="about-page-hero"><div className="about-page-photo"><Image src="/images/faith-about.jpg" alt="Faith smiling outdoors" fill sizes="(max-width: 720px) 100vw, 45vw" priority /></div><div><p className="eyebrow">Meet Faith</p><h1>The heart behind<br /><em>Faith.In.Dance.</em></h1><p>Dance is where discipline, joy, courage, and connection come together. Faith&apos;s coaching makes room for all four.</p></div></section>
+    <section className="about-story" id="story"><p className="eyebrow">Her approach</p><div><h2>Every dancer deserves to feel <em>capable.</em></h2><div className="about-story-copy"><p>Faith is more than an accomplished dancer—she&apos;s a passionate coach who believes in <strong>working hard, dreaming big, and helping young dancers discover just how capable they are.</strong></p><p>A former <strong>Division I dancer, UDA National Jazz Champion, and professional NBA dancer</strong>, Faith pairs elite-level dance experience with her education in <strong>Elementary and Special Education</strong>. That combination helps her meet dancers where they are and teach in a way that makes each next step feel possible.</p><p>With her Christian faith at the foundation of who she is, Faith&apos;s coaching goes beyond great technique. She&apos;s passionate about building <strong>strong, confident, and resilient dancers—mind, body, and soul—both onstage and beyond it.</strong></p><Link className="button" href="/#contact">Work with Faith <span>→</span></Link></div></div></section>
+    <section className="about-values"><article><span>01</span><h3>Work hard</h3><p>Build the habits and discipline that make growth possible.</p></article><article><span>02</span><h3>Dream big</h3><p>Make room for ambitious goals and the courage to pursue them.</p></article><article><span>03</span><h3>Grow strong</h3><p>Develop confidence that carries far beyond the stage.</p></article></section>
+    <footer><Link className="brand" href="/">Faith.In.Dance.</Link><span>Dance with confidence.</span><span>© 2026 Faith.In.Dance.</span></footer>
+  </main>;
+}
