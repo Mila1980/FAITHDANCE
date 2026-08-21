@@ -14,7 +14,7 @@ export default function Home() {
         <nav className="nav" aria-label="Main navigation">
           <a className="brand" href="#top">Faith.In.Dance.</a>
           <div className="nav-links">
-            <Link href="/about">About</Link><a href="#lessons">Lessons</a><Link href="/membership">Membership</Link><Link href="/prayers">Prayers</Link><Link href="/book">Book</Link>
+            <Link href="/about">About</Link><Link href="/membership">Lessons + Tutorials</Link><Link href="/prayers">Prayers</Link><Link href="/book">Book</Link>
           </div>
           <Link className="nav-button" href="/book">Book now</Link>
         </nav>
@@ -49,6 +49,10 @@ export default function Home() {
       <section className="lessons section" id="lessons">
         <p className="eyebrow">Ways to train</p><h2>Small steps.<br /><em>Lasting confidence.</em></h2>
         <div className="service-grid">{services.map(([number, title, copy]) => <article className="service-card" key={number}><p>{number}</p><h3>{title}</h3><span>{copy}</span><a href="#contact">View details <b>→</b></a></article>)}</div>
+        <aside className="home-membership-card">
+          <div><p className="eyebrow">Faith.In.Dance. Membership</p><h3>More support<br /><em>between lessons.</em></h3><p>A growing tutorial library and coaching space for dancers who want clear practice support, stronger foundations, and more confidence at home.</p></div>
+          <Link className="button" href="/membership">Explore lessons + tutorials <span>→</span></Link>
+        </aside>
       </section>
 
       <section className="contact section" id="contact">

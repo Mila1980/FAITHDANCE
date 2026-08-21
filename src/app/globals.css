@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* Individual prayer sheets and the homepage lesson cards. */
+.lessons .service-card { background: #fff9ef; border-color: rgba(190,119,139,.42); box-shadow: 0 10px 24px rgba(122,72,86,.08); }
+.home-membership-card { background: var(--pink); color: #fff7f2; margin-top: 2rem; padding: clamp(1.8rem, 4vw, 3.25rem); display: flex; align-items: center; justify-content: space-between; gap: 2rem; }.home-membership-card h3 { font-size: clamp(2rem, 3.5vw, 3.6rem); }.home-membership-card > div > p:not(.eyebrow) { color: #fff7f2; font-size: .82rem; line-height: 1.75; max-width: 420px; }.home-membership-card .eyebrow { color: #f7deda; }.home-membership-card .button { flex: 0 0 auto; }
+.prayer-card-image .prayer-print-button { position: absolute; z-index: 2; top: .7rem; right: .7rem; border: 0; background: #fff9ef; color: #bd748a; padding: .6rem .75rem; font-size: .56rem; line-height: 1; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; box-shadow: 0 3px 10px rgba(92,47,60,.14); }.prayer-card-image .prayer-print-button:hover { background: #bd748a; color: #fff9ef; }.prayer-print-button span { padding-left: .18rem; font-size: .8rem; }
+
 :root { --pink: #d1a1a9; --pale: #f9e6dc; --rose: #e2c0c1; --hot: #d87b9f; --ink: #fff7f2; --muted: #f4dedb; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
