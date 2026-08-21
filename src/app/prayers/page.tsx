@@ -3,7 +3,7 @@ import Link from "next/link";
 import { PrayerPrintButton } from "@/components/prayer-print-button";
 
 const prayers = [
-  ["Prayer for all dancers", "prayer-for-all-dancers.png"], ["Prayer for strength", "prayer-for-strength.png"], ["Prayer for anxiety", "prayer-for-anxiety.png"], ["Prayer before taking the stage", "before-taking-the-stage.png"], ["Graceful strength through Christ", "graceful-strength.png"], ["Love in every deed", "love-in-every-deed.png"], ["Faith over sight", "faith-over-sight.png"], ["Let them praise through dancing", "praise-through-dancing.png"], ["Dance prayer", "dance-prayer.png"],
+  ["Prayer for all dancers", "prayer-for-all-dancers.png"], ["All things through Christ", "prayer-for-strength.png"], ["Prayer for anxiety", "prayer-for-anxiety.png"], ["Prayer before taking the stage", "before-taking-the-stage.png"], ["You are more than dance", "graceful-strength.png"], ["Love in every deed", "love-in-every-deed.png"], ["Faith over sight", "faith-over-sight.png"], ["Let them praise through dancing", "praise-through-dancing.png"], ["Dance prayer", "dance-prayer.png"],
 ] as const;
 
 export default function PrayersPage() {

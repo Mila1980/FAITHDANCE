@@ -33,6 +33,15 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="home-booking-banner" aria-label="In-person booking announcement">
+        <div>
+          <p className="eyebrow">In person at Laura Cote School of Dance</p>
+          <h2>Dance with Faith<br /><em>August 29–30.</em></h2>
+          <p>Book an in-person lesson, or join the Sunday morning worship class for $10.</p>
+        </div>
+        <Link className="button" href="/book">Book now <span>→</span></Link>
+      </section>
+
       <section className="about section" id="about">
         <p className="eyebrow">Meet Faith</p>
         <div className="about-grid">
