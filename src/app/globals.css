@@ -70,3 +70,33 @@ h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; font-weight: 600; l
 
 /* August booking is in person only. */
 .booking-page .price-grid { grid-template-columns: repeat(2, 1fr); }
+
+/* Phone layout: keep every heading and control inside the visible viewport. */
+html, body { max-width: 100%; overflow-x: clip; }
+@media (max-width: 720px) {
+  .nav, .member-nav { min-width: 0; padding-left: 1.25rem; padding-right: 1.25rem; }
+  .brand { font-size: 1.35rem; }
+  .nav-button { flex: 0 0 auto; padding: .7rem .8rem; font-size: .54rem; }
+  .hero { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .actions { align-items: flex-start; flex-direction: column; gap: 1rem; }
+  .intro { max-width: 100%; }
+  .prayer-hero, .booking-hero { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .prayer-hero h1, .booking-hero h1 { width: 100%; max-width: 100%; font-size: clamp(3rem, 14vw, 3.6rem); text-align: center; overflow-wrap: anywhere; }
+  .prayer-hero > p:not(.eyebrow), .booking-hero > p:not(.eyebrow) { width: 100%; max-width: 100%; overflow-wrap: anywhere; }
+  .booking-dates { width: 100%; max-width: 430px; }
+  .booking-dates div { flex: 1 1 0; min-width: 0; padding-left: .45rem; padding-right: .45rem; }
+  .booking-fit { display: grid; grid-template-columns: 1fr; width: min(100%, 260px); }
+  .booking-fit span { text-align: center; }
+  .prayer-library { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .prayer-card-image { width: 100%; margin-left: auto; margin-right: auto; }
+}
+
+@media (max-width: 720px) {
+  .nav, .member-nav { width: 100vw; }
+  .prayer-hero > .eyebrow, .prayer-hero > h1, .prayer-hero > p:not(.eyebrow), .booking-hero > .eyebrow, .booking-hero > h1, .booking-hero > p:not(.eyebrow), .booking-hero > .booking-dates, .booking-hero > .booking-fit {
+    position: relative;
+    left: 50%;
+    width: calc(100vw - 2.5rem);
+    transform: translateX(-50%);
+  }
+}
