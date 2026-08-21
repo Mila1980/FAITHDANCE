@@ -43,7 +43,7 @@ export default function Home() {
 
       <section className="dance-focus section">
         <p className="eyebrow">A foundation in dance</p>
-        <div className="focus-list"><span>Competitive studio training</span><span>Collegiate dancer<br />Grand Canyon University</span><span>National championship dance team member</span><span>Professional NBA dancer</span></div>
+        <div className="focus-list"><span>Competitive<br />studio training</span><span><strong>Division I dancer</strong><br />Grand Canyon University</span><span><strong>UDA National<br />Jazz Champion</strong></span><span><strong>Professional<br />NBA dancer</strong><br />Minnesota Timberwolves</span></div>
       </section>
 
       <section className="lessons section" id="lessons">
