@@ -105,3 +105,10 @@ html, body { max-width: 100%; overflow-x: clip; }
     transform: none;
   }
 }
+
+@media (max-width: 720px) {
+  .home-membership-card { grid-template-columns: 1fr; gap: 1.25rem; padding: 1.25rem; }
+  .home-membership-copy { padding: .4rem; }
+  .home-membership-includes { padding: 1.5rem; }
+  .home-membership-includes .button { align-self: stretch; text-align: center; }
+}
