@@ -1,20 +1,22 @@
 import Link from "next/link";
 
-const lessonTracks = [
-  ["Technique Foundations", "Build cleaner movement, stronger basics, and a training rhythm that makes sense.", "6 lessons"],
-  ["Tricks & Skills", "Break down progressions, smart drills, and the confidence to keep showing up.", "8 lessons"],
-  ["Performance Prep", "Use practice plans, mindset tools, and polished details before the big moment.", "5 lessons"],
-  ["Stretch & Strength", "Support your movement with dancer-focused flexibility and strength sessions.", "7 lessons"],
+const tutorialPreviews = [
+  ["01", "Foundation", "Cartwheel.", "Build a confident, clean cartwheel from the ground up."],
+  ["02", "Technique", "Leaps.", "Create more height, extension, and ease through every leap."],
+  ["03", "Control", "Turns.", "Find your center and make every turn feel more secure."],
 ];
 
 export default function MembershipPage() {
-  return <main className="member-page">
-    <nav className="member-nav"><Link className="brand" href="/">Faith.In.Dance.</Link><div><Link href="/">Home</Link><a href="#lesson-menu">Lesson menu</a><a href="#join">Join</a></div><Link className="nav-button" href="#join">Become a member</Link></nav>
-    <section className="member-hero"><div><p className="eyebrow">Faith Dance Membership</p><h1>Train with<br /><em>purpose.</em></h1><p className="member-intro">A supportive online space for dancers who want more structure, stronger skills, and a coach in their corner between Zoom lessons.</p><a className="button" href="#join">See what&apos;s inside <span>→</span></a></div><div className="member-hero-card"><p>Member coaching space</p><strong>your next<br />stronger step</strong><span>Technique · confidence · performance</span></div></section>
-    <section className="member-benefits"><p className="eyebrow">More than a lesson library</p><div><h2>What members<br /><em>get to come back to.</em></h2><ul><li><b>New guided lessons</b><span>Clear video-based training built around the skills dancers ask for most.</span></li><li><b>Practice plans</b><span>Simple weekly structure so progress does not depend on guessing what to do next.</span></li><li><b>Performance support</b><span>Practical preparation for auditions, competitions, teams, and confidence under pressure.</span></li></ul></div></section>
-    <section className="lesson-menu" id="lesson-menu"><p className="eyebrow">Lesson menu</p><h2>Choose your<br /><em>next focus.</em></h2><p className="menu-intro">Each track gives dancers a clear place to begin. Final lesson videos and member progress will be connected once Faith&apos;s program is ready to launch.</p><div className="track-grid">{lessonTracks.map(([title, copy, count], index) => <article key={title}><span>0{index + 1}</span><p>{count}</p><h3>{title}</h3><div>{copy}</div><button type="button">View track <b>→</b></button></article>)}</div></section>
-    <section className="member-coach"><div className="coach-photo"><span>Faith&apos;s membership photo</span></div><div><p className="eyebrow">Coaching that continues</p><h2>Less pressure.<br /><em>More progress.</em></h2><p>The membership is not about doing everything at once. It is about knowing what to practice, returning to the basics when needed, and building confidence one count at a time.</p></div></section>
-    <section className="member-join" id="join"><p className="eyebrow">Join the list</p><h2>Be first when<br /><em>membership opens.</em></h2><p>Membership access, pricing, and the first lesson tracks are being finalized.</p><a className="button" href="mailto:hello@faithdance.com?subject=Faith%20Dance%20Membership">I&apos;m interested <span>→</span></a><small>This will be connected to Faith&apos;s real email before launch.</small></section>
+  return <main className="membership-tutorial-page">
+    <nav className="member-nav"><Link className="brand" href="/">Faith.In.Dance.</Link><div><Link href="/about">About</Link><Link href="/#lessons">Lessons</Link><Link href="/membership">Tutorials</Link></div><Link className="nav-button" href="/#contact">Inquire</Link></nav>
+
+    <section className="tutorial-hero"><p className="eyebrow">Practice with purpose</p><h1>Foundational skill<br /><em>tutorials.</em></h1><p>Simple, supportive breakdowns to help dancers feel more prepared for their next Zoom lesson and more confident when they practice at home.</p></section>
+
+    <section className="membership-access"><div className="access-intro"><p className="eyebrow">Choose your access</p><h2>A little<br />support, or <em>so<br />much more.</em></h2></div><div className="access-card"><div className="access-tabs"><span>Free video guide</span><strong>Member coaching</strong></div><div className="access-card-body"><div><p className="eyebrow">Membership coming soon</p><h3>More coaching,<br />right at <em>home.</em></h3><p>A supportive online membership for dancers who want personalized guidance between their private Zoom lessons.</p><Link href="#join" className="text-link">Get early access <span>→</span></Link></div><div className="access-highlight"><p>Faith.In.Dance. membership</p><strong>Everything<br />included.</strong><ul><li>First access to foundational video lessons</li><li>New skill breakdowns as they are released</li><li>Practice prompts for between Zoom sessions</li><li>Member-only coaching updates</li></ul><Link className="button" href="#join">Join the list <span>→</span></Link></div></div></div></section>
+
+    <section className="tutorial-list" aria-label="Tutorial preview curriculum">{tutorialPreviews.map(([number, category, title, copy], index) => <article className={index % 2 ? "tutorial-row is-reversed" : "tutorial-row"} key={title}><div className="tutorial-video"><span>Lesson preview</span><b>▶</b></div><div className="tutorial-copy"><p className="eyebrow">{number} · {category}</p><h2>{title}</h2><p>{copy}</p><span className="tutorial-status">Lesson coming soon <b>→</b></span></div></article>)}</section>
+
+    <section className="tutorial-cta" id="join"><div><p className="eyebrow">Make it yours</p><h2>What would you<br /><em>love to work<br />on?</em></h2><p>Choose what you need most. Faith will use the early-interest list to shape the first tutorials and Zoom coaching support.</p></div><div className="interest-card"><p>Your lesson <span>0 selected</span></p><button type="button">Learn this skill <b>+</b></button><button type="button">Clean this skill <b>+</b></button><button type="button">Build more skills <b>+</b></button><a className="button" href="mailto:hello@faithdance.com?subject=Faith.In.Dance.%20Membership">Join the early list <span>→</span></a></div></section>
     <footer><Link className="brand" href="/">Faith.In.Dance.</Link><span>Dance with confidence.</span><span>© 2026 Faith.In.Dance.</span></footer>
   </main>;
 }
