@@ -1,4 +1,5 @@
 @import "tailwindcss";
+.tutorial-hero { display: flex; flex-direction: column; align-items: center; justify-content: center; }.tutorial-hero h1, .tutorial-hero .eyebrow { width: 100%; text-align: center; margin-left: auto; margin-right: auto; }
 .about-story-heading .about-bb-photo { position: relative; height: clamp(260px, 28vw, 410px); margin-top: 2rem; overflow: hidden; border: .35rem solid #fff7f2; box-shadow: .55rem .55rem 0 rgba(209,161,169,.28); }.about-story-heading .about-bb-photo img { object-fit: cover; object-position: center 43%; }.about-full-page > .about-bb-photo { display: none; }
 
 /* Individual prayer sheets and the homepage lesson cards. */
