@@ -50,12 +50,14 @@ export default function Home() {
         <p className="eyebrow">Ways to train</p><h2>Small steps.<br /><em>Lasting confidence.</em></h2>
         <div className="service-grid">{services.map(([number, title, copy]) => <article className="service-card" key={number}><p>{number}</p><h3>{title}</h3><span>{copy}</span><a href="#contact">View details <b>→</b></a></article>)}</div>
         <aside className="home-membership-card">
-          <div><p className="eyebrow">Faith.In.Dance. Membership</p><h3>More support<br /><em>between lessons.</em></h3><p>A growing tutorial library and coaching space for dancers who want clear practice support, stronger foundations, and more confidence at home.</p></div>
+          <div className="home-membership-copy"><p className="eyebrow">Membership coming soon</p><h3>More coaching,<br />right at <em>home.</em></h3><p>A supportive online membership for dancers who want personalized guidance between their private Zoom lessons.</p><Link href="/membership" className="text-link">Explore lessons + tutorials <span>→</span></Link></div>
+          <div className="home-membership-includes"><p>Faith.In.Dance. membership</p><strong>Everything<br />included.</strong><ul><li>First access to foundational video lessons</li><li>New skill breakdowns as they are released</li><li>Practice prompts for between Zoom sessions</li><li>Member-only coaching updates</li></ul><Link className="button" href="/membership">Coming soon <span>→</span></Link></div>
           <Link className="button" href="/membership">Explore lessons + tutorials <span>→</span></Link>
         </aside>
       </section>
 
       <section className="contact section" id="contact">
+        <div className="contact-clarifier"><p className="eyebrow">Have questions?</p><h2>Reach out.<br /><em>Let&apos;s talk.</em></h2><p>Not sure what kind of coaching would best support your dancer? Send Faith a note and she&apos;ll help you figure out the right next step.</p></div>
         <div><p className="eyebrow">Let&apos;s dance</p><h2>Ready to take<br />the <em>next step?</em></h2><p>Tell Faith a little about your dancer and the support you&apos;re looking for. She&apos;ll be in touch with next steps.</p></div>
         <form className="inquiry-form"><label>Parent / dancer name<input placeholder="Your name" /></label><label>Email<input type="email" placeholder="you@example.com" /></label><label>What would you like help with?<select defaultValue=""><option value="" disabled>Select a coaching focus</option><option>Private Zoom lesson</option><option>Tricks & technique</option><option>Performance prep</option></select></label><button type="button" className="button">Ask about Zoom coaching <span>→</span></button><small>A real booking form will be connected here.</small></form>
       </section>
