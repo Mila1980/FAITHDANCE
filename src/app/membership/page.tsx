@@ -8,7 +8,7 @@ const tutorialPreviews = [
 
 export default function MembershipPage() {
   return <main className="membership-tutorial-page">
-    <nav className="member-nav"><Link className="brand" href="/">Faith.In.Dance.</Link><div><Link href="/about">About</Link><Link href="/#lessons">Lessons</Link><Link href="/membership">Tutorials</Link></div><Link className="nav-button" href="/#contact">Inquire</Link></nav>
+    <nav className="member-nav"><Link className="brand" href="/">Faith.In.Dance.</Link><div><Link href="/about">About</Link><Link href="/#lessons">Lessons</Link><Link href="/membership">Tutorials</Link><Link href="/prayers">Prayers</Link></div><Link className="nav-button" href="/book">Book now</Link></nav>
 
     <section className="tutorial-hero"><p className="eyebrow">Practice with purpose</p><h1>Foundational skill<br /><em>tutorials.</em></h1><p>Simple, supportive breakdowns to help dancers feel more prepared for their next Zoom lesson and more confident when they practice at home.</p></section>
 

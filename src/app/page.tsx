@@ -14,7 +14,7 @@ export default function Home() {
         <nav className="nav" aria-label="Main navigation">
           <a className="brand" href="#top">Faith.In.Dance.</a>
           <div className="nav-links">
-            <Link href="/about">About</Link><a href="#lessons">Lessons</a><Link href="/membership">Membership</Link><Link href="/book">Book</Link>
+            <Link href="/about">About</Link><a href="#lessons">Lessons</a><Link href="/membership">Membership</Link><Link href="/prayers">Prayers</Link><Link href="/book">Book</Link>
           </div>
           <Link className="nav-button" href="/book">Book now</Link>
         </nav>
