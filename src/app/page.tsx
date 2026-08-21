@@ -1,69 +1,59 @@
-import Image from "next/image";
+const services = [
+  ["01", "Private lessons", "One-on-one coaching for dancers who want focused support, confident basics, and a clear next step."],
+  ["02", "Tricks & technique", "Targeted coaching to build stronger foundations, sharper skills, and cleaner execution."],
+  ["03", "Performance prep", "Prepare for auditions, competitions, team placement, or the moment you want to walk in ready."],
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main>
+      <section className="hero" id="top">
+        <nav className="nav" aria-label="Main navigation">
+          <a className="brand" href="#top">faith<span>.</span></a>
+          <div className="nav-links">
+            <a href="#about">About</a><a href="#lessons">Lessons</a><a href="#gallery">Gallery</a><a href="#contact">Tutorials</a>
+          </div>
+          <a className="nav-button" href="#contact">Inquire</a>
+        </nav>
+        <div className="hero-grid">
+          <div className="hero-copy">
+            <p className="eyebrow">Private dance coaching</p>
+            <h1>Find your <em>freedom</em> in motion.</h1>
+            <p className="intro">Thoughtful, one-on-one dance coaching that helps every dancer feel capable, grounded, and confident.</p>
+            <div className="actions"><a className="button" href="#contact">Book a lesson <span>→</span></a><a className="text-link" href="#about">Meet Faith</a></div>
+          </div>
+          <div className="portrait portrait-main"><span>Faith&apos;s hero photo</span></div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      <section className="about section" id="about">
+        <p className="eyebrow">Meet Faith</p>
+        <div className="about-grid">
+          <h2>Technique with <em>heart</em>, and room to <em>be yourself.</em></h2>
+          <div><p>Faith has spent her life immersed in dance—training, performing, and helping dancers grow with confidence. Her teaching brings together technical detail, genuine encouragement, and a love for the person behind the performance.</p><p>Whether your dancer is learning their first trick, preparing for a new season, or finding confidence in their movement, Faith creates a space where they can grow.</p><a className="text-link" href="#lessons">Explore lessons <span>→</span></a></div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      <section className="dance-focus section">
+        <p className="eyebrow">A foundation in dance</p>
+        <div className="focus-list"><span>Competitive dance studio child</span><span>Collegiate dancer<br />Grand Canyon University</span><span>National championship dance team member</span><span>Professional NFL cheerleader</span></div>
+      </section>
+
+      <section className="lessons section" id="lessons">
+        <p className="eyebrow">Ways to train</p><h2>Small steps.<br /><em>Lasting confidence.</em></h2>
+        <div className="service-grid">{services.map(([number, title, copy]) => <article className="service-card" key={number}><p>{number}</p><h3>{title}</h3><span>{copy}</span><a href="#contact">View details <b>→</b></a></article>)}</div>
+      </section>
+
+      <section className="gallery section" id="gallery">
+        <div className="gallery-copy"><p className="eyebrow">In the studio</p><h2>Joy in<br /><em>every count.</em></h2><p>A glimpse into Faith&apos;s world: real movement, performance, and dancers finding their power.</p></div>
+        <div className="gallery-grid"><div className="portrait one"><span>Studio photo</span></div><div className="portrait two"><span>Performance photo</span></div><div className="portrait three"><span>Team photo</span></div></div>
+      </section>
+
+      <section className="contact section" id="contact">
+        <div><p className="eyebrow">Let&apos;s dance</p><h2>Ready to take<br />the <em>next step?</em></h2><p>Tell Faith a little about your dancer and the support you&apos;re looking for. She&apos;ll be in touch with next steps.</p></div>
+        <form className="inquiry-form"><label>Parent / dancer name<input placeholder="Your name" /></label><label>Email<input type="email" placeholder="you@example.com" /></label><label>What would you like help with?<select defaultValue=""><option value="" disabled>Select a lesson focus</option><option>Private lessons</option><option>Tricks & technique</option><option>Performance prep</option></select></label><button type="button" className="button">Join the lesson list <span>→</span></button><small>A real booking form will be connected here.</small></form>
+      </section>
+      <footer><a className="brand" href="#top">faith<span>.</span></a><span>Dance with confidence.</span><span>© 2026 Faith Dance</span></footer>
+    </main>
   );
 }
