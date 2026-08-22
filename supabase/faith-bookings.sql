@@ -8,3 +8,7 @@ create table if not exists public.faith_booking_slots (
 );
 alter table public.faith_bookings enable row level security;
 alter table public.faith_booking_slots enable row level security;
+
+alter table public.faith_bookings add column if not exists payment_status text not null default 'pending';
+alter table public.faith_bookings add column if not exists stripe_checkout_session_id text unique;
+alter table public.faith_bookings add column if not exists paid_at timestamptz;
