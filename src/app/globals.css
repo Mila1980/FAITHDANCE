@@ -135,8 +135,8 @@ html, body { max-width: 100%; overflow-x: clip; }
 @media (max-width: 720px) { .hero-photo-baby, .hero-photo-pose, .hero-photo-cheer, .hero-photo-gcu { width: 46%; height: 43%; }.hero-photo-baby { left: 0; top: 0; }.hero-photo-pose { left: 17%; top: 16%; }.hero-photo-cheer { left: 34%; top: 32%; }.hero-photo-gcu { left: 51%; top: 48%; } }
 
 /* Fine-tune the photo staircase placement. */
-.hero-photo-baby { left: calc(0% - .5in); top: calc(0% - .5in); }.hero-photo-pose { left: calc(20% - .5in); top: calc(14% - .5in); }.hero-photo-gcu { left: calc(60% + .5in); top: calc(42% + .5in); }
-@media (max-width: 720px) { .hero-photo-baby { left: calc(0% - .25in); top: calc(0% - .25in); }.hero-photo-pose { left: calc(17% - .25in); top: calc(16% - .25in); }.hero-photo-gcu { left: calc(51% + .25in); top: calc(48% + .25in); } }
+.hero-photo-baby { left: calc(0% - 1in); top: calc(0% - .5in); }.hero-photo-pose { left: calc(20% - .5in); top: calc(14% - .5in); }.hero-photo-gcu { left: calc(60% + .5in); top: calc(42% + .5in); }
+@media (max-width: 720px) { .hero-photo-baby { left: calc(0% - .5in); top: calc(0% - .25in); }.hero-photo-pose { left: calc(17% - .25in); top: calc(16% - .25in); }.hero-photo-gcu { left: calc(51% + .25in); top: calc(48% + .25in); } }
 @media (max-width: 720px) { .hero-copy h1 { max-width: 330px; font-size: clamp(3rem, 11vw, 3.4rem); } }
 
 /* Compact the prayer introduction and keep the feature photo with the printable library. */
