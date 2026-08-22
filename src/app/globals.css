@@ -117,3 +117,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 .prayer-hero-crosses { position: relative; width: clamp(90px, 13vw, 140px); aspect-ratio: .76; overflow: hidden; margin: 0 auto 1.75rem; border: .3rem solid #fff7f2; box-shadow: .35rem .35rem 0 rgba(190,119,139,.22); }.prayer-hero-crosses img { object-fit: cover; object-position: center; }
 .hero-photo-gcu { width: 40%; height: 51%; right: -8%; bottom: -18%; transform: rotate(7deg); z-index: 6; }.hero-photo-gcu img { object-fit: cover; object-position: center; }
 @media (max-width: 720px) { .hero-photo-stack { height: 122vw; min-height: 460px; }.hero-photo-baby { width: 25%; height: 25%; left: 0; top: 0; }.hero-photo-pose { width: 58%; height: 66%; left: 15%; top: 7%; }.hero-photo-cheer { width: 35%; height: 43%; right: 0; bottom: 9%; }.hero-photo-gcu { width: 42%; height: 45%; right: 3%; bottom: -6%; } }
+
+/* Keep the prayer heading centered and feature Faith between the introduction and printables. */
+.prayer-hero h1 { width: 100%; max-width: 620px; margin-left: auto; margin-right: auto; text-align: center; }.prayer-feature-photo { background: #fffaf5; padding: clamp(2.5rem, 6vw, 4rem) 1.25rem; display: grid; place-items: center; }.prayer-feature-photo > div { position: relative; width: min(100%, 360px); aspect-ratio: 1; overflow: hidden; border: .38rem solid #fff7f2; box-shadow: .55rem .55rem 0 rgba(190,119,139,.22); }.prayer-feature-photo img { object-fit: cover; object-position: center; }
+@media (max-width: 720px) { .prayer-hero h1 { font-size: clamp(2.8rem, 13vw, 3.5rem); line-height: .92; } }
