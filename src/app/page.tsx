@@ -21,7 +21,7 @@ export default function Home() {
         <div className="hero-grid">
           <div className="hero-copy">
             <p className="eyebrow">Private Zoom dance coaching</p>
-            <h1>Find your <em>freedom</em> in motion.</h1>
+            <h1>Putting meaning in <em>motion.</em></h1>
             <p className="intro">Thoughtful, one-on-one Zoom coaching that helps every dancer feel capable, grounded, and confident—wherever they are.</p>
             <div className="actions"><Link className="button" href="/book">Book a Zoom lesson <span>→</span></Link><Link className="text-link" href="/membership">Explore membership</Link></div>
           </div>
