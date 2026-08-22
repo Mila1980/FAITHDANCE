@@ -125,6 +125,10 @@ html, body { max-width: 100%; overflow-x: clip; }
 /* Four-photo homepage progression: childhood to GCU, arranged from upper-left to lower-right. */
 .hero-photo-stack { height: min(58vw, 560px); min-height: 430px; }.hero-photo-baby { width: 27%; height: 28%; left: 0; top: 0; z-index: 4; }.hero-photo-pose { width: 49%; height: 65%; left: 16%; top: 11%; z-index: 3; }.hero-photo-cheer { width: 30%; height: 38%; right: 3%; bottom: 22%; z-index: 5; }.hero-photo-gcu { width: 36%; height: 44%; right: -5%; bottom: -5%; transform: rotate(7deg); z-index: 6; }
 @media (max-width: 720px) { .hero-photo-stack { height: 128vw; min-height: 485px; }.hero-photo-baby { width: 26%; height: 24%; left: 0; top: 0; }.hero-photo-pose { width: 52%; height: 61%; left: 14%; top: 10%; }.hero-photo-cheer { width: 32%; height: 35%; right: 2%; bottom: 19%; }.hero-photo-gcu { width: 40%; height: 42%; right: -2%; bottom: -3%; } }
+
+/* Four equal photo frames, descending like steps from baby to GCU. */
+.hero-photo-stack { height: min(62vw, 590px); min-height: 470px; }.hero-photo-baby, .hero-photo-pose, .hero-photo-cheer, .hero-photo-gcu { width: 30%; height: 40%; transform: rotate(0); }.hero-photo-baby { left: 0; top: 0; z-index: 3; }.hero-photo-pose { left: 21%; top: 16%; z-index: 4; }.hero-photo-cheer { left: 42%; right: auto; top: 32%; bottom: auto; z-index: 5; }.hero-photo-gcu { left: 63%; right: auto; top: 48%; bottom: auto; z-index: 6; }.hero-photo-gcu img { object-position: center; }
+@media (max-width: 720px) { .hero-photo-stack { height: 132vw; min-height: 500px; }.hero-photo-baby, .hero-photo-pose, .hero-photo-cheer, .hero-photo-gcu { width: 40%; height: 37%; }.hero-photo-baby { left: 0; top: 0; }.hero-photo-pose { left: 18%; top: 18%; }.hero-photo-cheer { left: 36%; top: 36%; }.hero-photo-gcu { left: 54%; top: 54%; } }
 @media (max-width: 720px) { .hero-copy h1 { max-width: 330px; font-size: clamp(3rem, 11vw, 3.4rem); } }
 
 /* Compact the prayer introduction and keep the feature photo with the printable library. */
