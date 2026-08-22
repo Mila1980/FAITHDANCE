@@ -70,6 +70,7 @@ h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; font-weight: 600; l
 
 /* August booking is in person only. */
 .booking-page .price-grid { grid-template-columns: repeat(2, 1fr); }
+.time-grid button:disabled { cursor: not-allowed; opacity: .48; text-decoration: line-through; }.booking-details { display: grid; gap: .7rem; }.booking-details label { display: grid; gap: .35rem; color: #bd748a; font-size: .6rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }.booking-details input, .booking-details textarea { box-sizing: border-box; width: 100%; border: 1px solid #efd5d2; background: #fff7f2; color: #9d6172; padding: .7rem; font: .78rem Arial, sans-serif; resize: vertical; }.booking-status { color: #a36f7c !important; font-size: .72rem !important; line-height: 1.45; }
 
 /* Phone layout: keep every heading and control inside the visible viewport. */
 html, body { max-width: 100%; overflow-x: clip; }
