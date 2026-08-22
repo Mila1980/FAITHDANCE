@@ -34,12 +34,7 @@ export async function POST(request: Request) {
       const supabase = createClient(supabaseUrl, supabaseKey, { auth: { persistSession: false } });
       const { data: booking } = await supabase.from("faith_bookings").select("id,name,email,phone,dancer_name,notes,session_type,requested_slots").eq("id", session.client_reference_id).single();
       if (booking) {
-        const requestedSlots = Array.isArray(booking.requested_slots) ? booking.requested_slots : [];
-        if (requestedSlots.length) {
-          const { error: slotError } = await supabase.from("faith_booking_slots").insert(requestedSlots.map((slot: { key: string; label: string }) => ({ booking_id: booking.id, slot_key: slot.key, slot_label: slot.label })));
-          if (slotError) { await supabase.from("faith_bookings").update({ status: "payment_conflict", payment_status: "paid", stripe_checkout_session_id: session.id, paid_at: new Date().toISOString() }).eq("id", booking.id); return NextResponse.json({ received: true }); }
-        }
-        await supabase.from("faith_bookings").update({ status: "confirmed", payment_status: "paid", stripe_checkout_session_id: session.id, paid_at: new Date().toISOString() }).eq("id", booking.id);
+        await supabase.from("faith_bookings").update({ status: "confirmed", payment_status: "paid", stripe_checkout_session_id: session.id, paid_at: new Date().toISOString(), hold_expires_at: null }).eq("id", booking.id);
         await sendPaidBookingEmails(booking);
       }
     }
