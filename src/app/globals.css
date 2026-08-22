@@ -142,11 +142,11 @@ html, body { max-width: 100%; overflow-x: clip; }
 /* Phone-only photo staircase: keep each picture inside the frame and evenly spaced. */
 @media (max-width: 720px) {
   .hero-photo-stack { width: min(100%, 420px); height: 112vw; min-height: 385px; max-height: 470px; }
-  .hero-photo-baby, .hero-photo-pose, .hero-photo-cheer, .hero-photo-gcu { width: 44%; height: 42%; }
+  .hero-photo-baby, .hero-photo-pose, .hero-photo-cheer, .hero-photo-gcu { width: 36%; height: 36%; }
   .hero-photo-baby { left: 0; top: 0; }
-  .hero-photo-pose { left: 18%; top: 14%; }
-  .hero-photo-cheer { left: 36%; top: 28%; }
-  .hero-photo-gcu { left: 54%; top: 42%; }
+  .hero-photo-pose { left: 20%; top: 18%; }
+  .hero-photo-cheer { left: 40%; top: 36%; }
+  .hero-photo-gcu { left: 60%; top: 54%; }
 }
 
 /* Compact the prayer introduction and keep the feature photo with the printable library. */
