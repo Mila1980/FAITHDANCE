@@ -146,7 +146,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   .hero-photo-baby { left: 0; top: 0; }
   .hero-photo-pose { left: 20%; top: 18%; }
   .hero-photo-cheer { left: 40%; top: 38%; }
-  .hero-photo-gcu { left: 60%; top: 56%; }
+  .hero-photo-gcu { left: 64%; top: 56%; }
 }
 
 /* Compact the prayer introduction and keep the feature photo with the printable library. */
