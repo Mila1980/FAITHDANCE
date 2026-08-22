@@ -7,7 +7,7 @@ type PrayerPrintButtonProps = {
 
 export function PrayerPrintButton({ title, imageUrl }: PrayerPrintButtonProps) {
   function printPrayer() {
-    const printWindow = window.open("", "_blank", "noopener,noreferrer");
+    const printWindow = window.open("", "_blank");
     if (!printWindow) return;
     const imageSource = new URL(imageUrl, window.location.origin).href;
 
