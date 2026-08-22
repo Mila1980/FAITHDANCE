@@ -121,3 +121,8 @@ html, body { max-width: 100%; overflow-x: clip; }
 /* Keep the prayer heading centered and feature Faith between the introduction and printables. */
 .prayer-hero h1 { width: 100%; max-width: 620px; margin-left: auto; margin-right: auto; text-align: center; }.prayer-feature-photo { background: #fffaf5; padding: clamp(2.5rem, 6vw, 4rem) 1.25rem; display: grid; place-items: center; }.prayer-feature-photo > div { position: relative; width: min(100%, 360px); aspect-ratio: 1; overflow: hidden; border: .38rem solid #fff7f2; box-shadow: .55rem .55rem 0 rgba(190,119,139,.22); }.prayer-feature-photo img { object-fit: cover; object-position: center; }
 @media (max-width: 720px) { .prayer-hero h1 { font-size: clamp(2.8rem, 13vw, 3.5rem); line-height: .92; } }
+
+/* Four-photo homepage progression: childhood to GCU, arranged from upper-left to lower-right. */
+.hero-photo-stack { height: min(58vw, 560px); min-height: 430px; }.hero-photo-baby { width: 27%; height: 28%; left: 0; top: 0; z-index: 4; }.hero-photo-pose { width: 49%; height: 65%; left: 16%; top: 11%; z-index: 3; }.hero-photo-cheer { width: 30%; height: 38%; right: 3%; bottom: 22%; z-index: 5; }.hero-photo-gcu { width: 36%; height: 44%; right: -5%; bottom: -5%; transform: rotate(7deg); z-index: 6; }
+@media (max-width: 720px) { .hero-photo-stack { height: 128vw; min-height: 485px; }.hero-photo-baby { width: 26%; height: 24%; left: 0; top: 0; }.hero-photo-pose { width: 52%; height: 61%; left: 14%; top: 10%; }.hero-photo-cheer { width: 32%; height: 35%; right: 2%; bottom: 19%; }.hero-photo-gcu { width: 40%; height: 42%; right: -2%; bottom: -3%; } }
+@media (max-width: 720px) { .hero-copy h1 { max-width: 330px; font-size: clamp(3rem, 11vw, 3.4rem); } }
