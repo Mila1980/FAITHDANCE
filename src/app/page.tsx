@@ -29,6 +29,7 @@ export default function Home() {
             <div className="hero-photo hero-photo-baby"><Image src="/images/faith-baby.jpeg" alt="Faith as a young dancer" fill sizes="(max-width: 720px) 38vw, 220px" priority /></div>
             <div className="hero-photo hero-photo-pose"><Image src="/images/faith-dance-pose.jpeg" alt="Faith performing a dance pose on stage" fill sizes="(max-width: 720px) 68vw, 410px" priority /></div>
             <div className="hero-photo hero-photo-cheer"><Image src="/images/faith-cheerleading.jpg" alt="Faith cheering professionally" fill sizes="(max-width: 720px) 35vw, 210px" priority /></div>
+            <div className="hero-photo hero-photo-gcu"><Image src="/images/faith-gcu.jpg" alt="Faith dancing for Grand Canyon University" fill sizes="(max-width: 720px) 40vw, 230px" priority /></div>
           </div>
         </div>
       </section>
