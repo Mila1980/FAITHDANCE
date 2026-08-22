@@ -139,5 +139,15 @@ html, body { max-width: 100%; overflow-x: clip; }
 @media (max-width: 720px) { .hero-photo-baby { left: calc(0% - .5in); top: calc(0% - .25in); }.hero-photo-pose { left: calc(17% - .25in); top: calc(16% - .25in); }.hero-photo-gcu { left: calc(51% + .25in); top: calc(48% + .25in); } }
 @media (max-width: 720px) { .hero-copy h1 { max-width: 330px; font-size: clamp(3rem, 11vw, 3.4rem); } }
 
+/* Phone-only photo staircase: keep each picture inside the frame and evenly spaced. */
+@media (max-width: 720px) {
+  .hero-photo-stack { width: min(100%, 420px); height: 112vw; min-height: 385px; max-height: 470px; }
+  .hero-photo-baby, .hero-photo-pose, .hero-photo-cheer, .hero-photo-gcu { width: 44%; height: 42%; }
+  .hero-photo-baby { left: 0; top: 0; }
+  .hero-photo-pose { left: 18%; top: 14%; }
+  .hero-photo-cheer { left: 36%; top: 28%; }
+  .hero-photo-gcu { left: 54%; top: 42%; }
+}
+
 /* Compact the prayer introduction and keep the feature photo with the printable library. */
 .prayer-hero { padding-top: clamp(3rem, 6vw, 5rem); padding-bottom: clamp(3rem, 6vw, 5rem); }.prayer-library { padding-top: clamp(3rem, 6vw, 5rem); }.prayer-library-heading { margin-bottom: 1.75rem; }.prayer-feature-photo { padding: 0 0 clamp(2.5rem, 5vw, 4rem); background: transparent; }
