@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { InquiryForm } from "@/components/inquiry-form";
 
 const services = [
   ["01", "Private Zoom lessons", "One-on-one Zoom coaching for dancers who want focused support, confident basics, and a clear next step."],
@@ -69,7 +70,7 @@ export default function Home() {
       <section className="contact section" id="contact">
         <div className="contact-clarifier"><p className="eyebrow">Have questions?</p><h2>Reach out.<br /><em>Let&apos;s talk.</em></h2><p>Not sure what kind of coaching would best support your dancer? Send Faith a note and she&apos;ll help you figure out the right next step.</p></div>
         <div><p className="eyebrow">Let&apos;s dance</p><h2>Ready to take<br />the <em>next step?</em></h2><p>Tell Faith a little about your dancer and the support you&apos;re looking for. She&apos;ll be in touch with next steps.</p></div>
-        <form className="inquiry-form"><label>Parent / dancer name<input placeholder="Your name" /></label><label>Email<input type="email" placeholder="you@example.com" /></label><label>What would you like help with?<select defaultValue=""><option value="" disabled>Select a coaching focus</option><option>Private Zoom lesson</option><option>Tricks & technique</option><option>Performance prep</option></select></label><button type="button" className="button">Ask about Zoom coaching <span>→</span></button><small>A real booking form will be connected here.</small></form>
+        <InquiryForm />
       </section>
       <footer><a className="brand" href="#top">Faith.In.Dance.</a><span>Dance with confidence.</span><span>© 2026 Faith.In.Dance.</span></footer>
     </main>

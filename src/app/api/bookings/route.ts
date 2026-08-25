@@ -47,7 +47,9 @@ export async function POST(request: Request) {
   await clearExpiredHolds(supabase);
   const body = await request.json(); const slots = Array.isArray(body.slots) ? body.slots : []; const isWorship = body.sessionType === "worship-class";
   if (!body.name || !body.email || !body.phone || (!isWorship && !slots.length) || slots.some((slot: { key?: unknown }) => typeof slot.key !== "string" || !/^2026-08-(29|30)T\d{2}:\d{2}$/.test(slot.key))) return NextResponse.json({ error: "Please complete your contact details and choose an available time." }, { status: 400 });
-  const { data: booking, error } = await supabase.from("faith_bookings").insert({ name: body.name, email: body.email, phone: body.phone, dancer_name: body.dancerName || null, session_type: body.sessionType, notes: body.notes || null, status: "pending_payment", payment_status: "pending", requested_slots: slots, hold_expires_at: isWorship ? null : new Date(Date.now() + 10 * 60 * 1000).toISOString() }).select("id").single();
+  const coachingFocus = body.focus ? `What they would like to work on: ${body.focus}` : "";
+  const notes = [coachingFocus, body.notes].filter(Boolean).join("\n\n") || null;
+  const { data: booking, error } = await supabase.from("faith_bookings").insert({ name: body.name, email: body.email, phone: body.phone, dancer_name: body.dancerName || null, session_type: body.sessionType, notes, status: "pending_payment", payment_status: "pending", requested_slots: slots, hold_expires_at: isWorship ? null : new Date(Date.now() + 10 * 60 * 1000).toISOString() }).select("id").single();
   if (error || !booking) return NextResponse.json({ error: "We could not save your booking. Please try again." }, { status: 500 });
   if (!isWorship) {
     const { error: slotError } = await supabase.from("faith_booking_slots").insert(slots.map((slot: { key: string; label: string }) => ({ booking_id: booking.id, slot_key: slot.key, slot_label: slot.label })));
