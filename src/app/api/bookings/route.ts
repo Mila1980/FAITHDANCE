@@ -33,23 +33,10 @@ async function clearExpiredHolds(supabase: NonNullable<ReturnType<typeof databas
   await supabase.from("faith_bookings").delete().in("id", ids);
 }
 
-async function releaseRequestedTestSlots(supabase: NonNullable<ReturnType<typeof database>>) {
-  const testSlotKeys = ["2026-08-29T11:00", "2026-08-29T11:30", "2026-08-29T17:00", "2026-08-29T17:30"];
-  const { data: slots } = await supabase.from("faith_booking_slots").select("booking_id").in("slot_key", testSlotKeys);
-  if (!slots?.length) return;
-  const bookingIds = [...new Set(slots.map((slot) => slot.booking_id))];
-  await supabase.from("faith_booking_slots").delete().in("slot_key", testSlotKeys);
-  const { data: remainingSlots } = await supabase.from("faith_booking_slots").select("booking_id").in("booking_id", bookingIds);
-  const remainingBookingIds = new Set((remainingSlots ?? []).map((slot) => slot.booking_id));
-  const emptyBookingIds = bookingIds.filter((id) => !remainingBookingIds.has(id));
-  if (emptyBookingIds.length) await supabase.from("faith_bookings").delete().in("id", emptyBookingIds);
-}
-
 export async function GET() {
   const supabase = database();
   if (!supabase) return NextResponse.json({ bookedSlots: [] });
   await clearExpiredHolds(supabase);
-  await releaseRequestedTestSlots(supabase);
   const { data } = await supabase.from("faith_booking_slots").select("slot_key");
   return NextResponse.json({ bookedSlots: data?.map((slot) => slot.slot_key) ?? [] });
 }
