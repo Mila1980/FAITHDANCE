@@ -88,7 +88,6 @@ export function BookingSlotPicker() {
         email: form.get("email"),
         phone: form.get("phone"),
         dancerName: form.get("dancerName"),
-        focus: form.get("focus"),
         sessionType,
         slots: selected,
         notes: form.get("notes"),
@@ -194,18 +193,9 @@ export function BookingSlotPicker() {
             <label>Dancer name<input name="dancerName" placeholder="Optional" /></label>
             <label>Discount code<input name="promoCode" placeholder="Optional" /></label>
             <label>
-              What would you like to work on?
-              <select name="focus" required defaultValue="">
-                <option value="" disabled>Select a coaching focus</option>
-                <option>Private Zoom lesson</option>
-                <option>Tricks & technique</option>
-                <option>Performance prep</option>
-                <option>Audition or team placement</option>
-                <option>Confidence and encouragement</option>
-                <option>Something else</option>
-              </select>
+              What would you like to work on? (optional)
+              <textarea name="notes" rows={3} placeholder="Tell Faith what you would like help with." />
             </label>
-            <label>Anything Faith should know?<textarea name="notes" rows={3} placeholder="Optional" /></label>
           </div>
           <button type="submit" className="button" disabled={!selected.length || saving}>
             {saving ? "Saving…" : "Save my Zoom lesson"} <span>→</span>
