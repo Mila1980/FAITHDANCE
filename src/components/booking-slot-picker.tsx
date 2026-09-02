@@ -79,7 +79,6 @@ export function BookingSlotPicker() {
     setSaving(true);
     setStatus("");
     const form = new FormData(formElement);
-    const promoCode = String(form.get("promoCode") ?? "").trim();
     const response = await fetch("/api/bookings", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -100,29 +99,12 @@ export function BookingSlotPicker() {
       setBooked((current) => [...current, ...selected.map((slot) => slot.key)]);
       setSelected([]);
       formElement.reset();
-      if (paymentUrl && data.bookingId && !promoCode) {
+      if (paymentUrl && data.bookingId) {
         const checkout = new URL(paymentUrl);
         checkout.searchParams.set("client_reference_id", data.bookingId);
         setStatus("Your time is saved. Taking you to secure payment…");
         window.location.assign(checkout.toString());
         return;
-      }
-      if (data.bookingId) {
-        const checkoutResponse = await fetch("/api/checkout", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            bookingId: data.bookingId,
-            promoCode,
-          }),
-        });
-        const checkoutData = await checkoutResponse.json().catch(() => ({}));
-        if (checkoutResponse.ok && checkoutData.url) {
-          setStatus("Your time is saved. Taking you to secure payment…");
-          window.location.assign(checkoutData.url);
-          return;
-        }
-        setStatus(checkoutData.error ?? "We could not start secure payment. Please try again.");
       }
     } else {
       setStatus(data.error ?? "That time was just booked. Please choose another available time.");
@@ -208,7 +190,6 @@ export function BookingSlotPicker() {
             <label>Email for Zoom link<input name="email" type="email" required placeholder="you@example.com" /></label>
             <label>Phone<input name="phone" type="tel" required placeholder="Phone number" /></label>
             <label>Dancer name<input name="dancerName" placeholder="Optional" /></label>
-            <label>Discount code<input name="promoCode" placeholder="Optional" /></label>
             <label>
               What would you like to work on?
               <select name="focus" required defaultValue="">
@@ -227,7 +208,7 @@ export function BookingSlotPicker() {
             {saving ? "Saving…" : "Save my Zoom lesson"} <span>→</span>
           </button>
           {status && <small className="booking-status">{status}</small>}
-          <small>Use code FAITH26 for a 60-minute Zoom lesson: $30 for one dancer or $40 for two dancers.</small>
+          <small>Have code FAITH26? Enter it on Stripe&apos;s secure payment page for a 60-minute lesson: $30 for one dancer or $40 for two dancers.</small>
           <small>Your selected time is held while you complete secure payment.</small>
         </form>
       </section>
