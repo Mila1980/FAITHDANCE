@@ -30,17 +30,17 @@ export default function BookPage() {
           <div>
             <span>Thursday</span>
             <strong>September 3</strong>
-            <small>5 PM–8 PM</small>
+            <small>5 PM–9 PM</small>
           </div>
           <div>
             <span>Sunday</span>
             <strong>September 6</strong>
-            <small>2 PM–7 PM</small>
+            <small>2 PM–8 PM</small>
           </div>
           <div>
             <span>Monday</span>
             <strong>September 7</strong>
-            <small>10 AM–12 PM</small>
+            <small>10 AM–1 PM</small>
           </div>
         </div>
         <div className="booking-fit">
