@@ -1,23 +1,16 @@
 import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
 
-const faithEmail = "faithelarose@faithindance.com";
-
-function safeHtml(value: unknown) { return String(value ?? "").replace(/[&<>\"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[character] ?? character); }
-async function sendBookingEmails(body: Record<string, string>, slots: { label: string }[], isWorship: boolean) {
-  const key = process.env.RESEND_API_KEY;
-  if (!key) return;
-  const details = isWorship ? "Sunday Worship Dance Class<br>Sunday, August 30 · 8:00–9:00 AM<br>Laura Cote School of Dance · $10" : slots.map((slot) => safeHtml(slot.label)).join("<br>");
-  const customerName = safeHtml(body.name);
-  const resend = new Resend(key);
-  try {
-    await Promise.all([
-      resend.emails.send({ from: "Faith.In.Dance. <faithelarose@faithindance.com>", to: [body.email], replyTo: faithEmail, subject: "We received your Faith.In.Dance booking", html: `<p>Hi ${customerName},</p><p>We received your booking request for:</p><p><strong>${details}</strong></p><p>${isWorship ? "Your spot is held pending the $10 Stripe payment." : "Your time is held pending Stripe payment."}</p><p>Faith will follow up with any final details.</p><p>With love,<br>Faith.In.Dance.</p>` }),
-      resend.emails.send({ from: "Faith.In.Dance. <faithelarose@faithindance.com>", to: [faithEmail], subject: `New booking: ${safeHtml(body.name)}`, html: `<p><strong>New Faith.In.Dance booking</strong></p><p>${details}</p><p>Name: ${customerName}<br>Email: ${safeHtml(body.email)}<br>Phone: ${safeHtml(body.phone)}<br>Dancer: ${safeHtml(body.dancerName) || "Not provided"}<br>Notes: ${safeHtml(body.notes) || "None"}</p><p>Payment status: pending Stripe checkout.</p>` }),
-    ]);
-  } catch (error) { console.error("Booking email could not be sent", error); }
-}
+const validSlotKeys = new Set([
+  "2026-09-03T17:00", "2026-09-03T17:30", "2026-09-03T18:00",
+  "2026-09-03T18:30", "2026-09-03T19:00", "2026-09-03T19:30",
+  "2026-09-06T14:00", "2026-09-06T14:30", "2026-09-06T15:00",
+  "2026-09-06T15:30", "2026-09-06T16:00", "2026-09-06T16:30",
+  "2026-09-06T17:00", "2026-09-06T17:30", "2026-09-06T18:00",
+  "2026-09-06T18:30",
+  "2026-09-07T10:00", "2026-09-07T10:30", "2026-09-07T11:00",
+  "2026-09-07T11:30",
+]);
 
 function database() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -26,7 +19,11 @@ function database() {
 }
 
 async function clearExpiredHolds(supabase: NonNullable<ReturnType<typeof database>>) {
-  const { data } = await supabase.from("faith_bookings").select("id").eq("status", "pending_payment").lt("hold_expires_at", new Date().toISOString());
+  const { data } = await supabase
+    .from("faith_bookings")
+    .select("id")
+    .eq("status", "pending_payment")
+    .lt("hold_expires_at", new Date().toISOString());
   const ids = data?.map((booking) => booking.id) ?? [];
   if (!ids.length) return;
   await supabase.from("faith_booking_slots").delete().in("booking_id", ids);
@@ -43,17 +40,62 @@ export async function GET() {
 
 export async function POST(request: Request) {
   const supabase = database();
-  if (!supabase) return NextResponse.json({ error: "Booking setup is not connected yet." }, { status: 503 });
+  if (!supabase) {
+    return NextResponse.json({ error: "Booking setup is not connected yet." }, { status: 503 });
+  }
+
   await clearExpiredHolds(supabase);
-  const body = await request.json(); const slots = Array.isArray(body.slots) ? body.slots : []; const isWorship = body.sessionType === "worship-class";
-  if (!body.name || !body.email || !body.phone || (!isWorship && !slots.length) || slots.some((slot: { key?: unknown }) => typeof slot.key !== "string" || !/^2026-08-(29|30)T\d{2}:\d{2}$/.test(slot.key))) return NextResponse.json({ error: "Please complete your contact details and choose an available time." }, { status: 400 });
+  const body = await request.json();
+  const slots = Array.isArray(body.slots) ? body.slots : [];
+  const validSlots = slots.every(
+    (slot: { key?: unknown }) => typeof slot.key === "string" && validSlotKeys.has(slot.key),
+  );
+
+  if (!body.name || !body.email || !body.phone || !slots.length || !validSlots) {
+    return NextResponse.json(
+      { error: "Please complete your contact details and choose an available time." },
+      { status: 400 },
+    );
+  }
+
   const coachingFocus = body.focus ? `What they would like to work on: ${body.focus}` : "";
   const notes = [coachingFocus, body.notes].filter(Boolean).join("\n\n") || null;
-  const { data: booking, error } = await supabase.from("faith_bookings").insert({ name: body.name, email: body.email, phone: body.phone, dancer_name: body.dancerName || null, session_type: body.sessionType, notes, status: "pending_payment", payment_status: "pending", requested_slots: slots, hold_expires_at: isWorship ? null : new Date(Date.now() + 10 * 60 * 1000).toISOString() }).select("id").single();
-  if (error || !booking) return NextResponse.json({ error: "We could not save your booking. Please try again." }, { status: 500 });
-  if (!isWorship) {
-    const { error: slotError } = await supabase.from("faith_booking_slots").insert(slots.map((slot: { key: string; label: string }) => ({ booking_id: booking.id, slot_key: slot.key, slot_label: slot.label })));
-    if (slotError) { await supabase.from("faith_bookings").delete().eq("id", booking.id); return NextResponse.json({ error: "That time was just selected by another family. Please choose another available time." }, { status: 409 }); }
+  const { data: booking, error } = await supabase
+    .from("faith_bookings")
+    .insert({
+      name: body.name,
+      email: body.email,
+      phone: body.phone,
+      dancer_name: body.dancerName || null,
+      session_type: body.sessionType,
+      notes,
+      status: "pending_payment",
+      payment_status: "pending",
+      requested_slots: slots,
+      hold_expires_at: new Date(Date.now() + 10 * 60 * 1000).toISOString(),
+    })
+    .select("id")
+    .single();
+
+  if (error || !booking) {
+    return NextResponse.json({ error: "We could not save your booking. Please try again." }, { status: 500 });
   }
+
+  const { error: slotError } = await supabase
+    .from("faith_booking_slots")
+    .insert(slots.map((slot: { key: string; label: string }) => ({
+      booking_id: booking.id,
+      slot_key: slot.key,
+      slot_label: slot.label,
+    })));
+
+  if (slotError) {
+    await supabase.from("faith_bookings").delete().eq("id", booking.id);
+    return NextResponse.json(
+      { error: "That time was just selected by another family. Please choose another available time." },
+      { status: 409 },
+    );
+  }
+
   return NextResponse.json({ ok: true, bookingId: booking.id });
 }

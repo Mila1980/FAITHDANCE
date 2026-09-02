@@ -35,11 +35,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="home-booking-banner" aria-label="In-person booking announcement">
+      <section className="home-booking-banner" aria-label="September Zoom lesson announcement">
         <div>
-          <p className="eyebrow">In person at Laura Cote School of Dance</p>
-          <h2>Dance with Faith<br /><em>August 29–30.</em></h2>
-          <p>Book an in-person lesson, or join the Sunday morning worship class for $10.</p>
+          <p className="eyebrow">Private Zoom lessons</p>
+          <h2>Dance with Faith<br /><em>September 3, 6 &amp; 7.</em></h2>
+          <p>Book a private Zoom lesson and receive your Zoom link by email after payment.</p>
         </div>
         <Link className="button" href="/book">Book now <span>→</span></Link>
       </section>

@@ -2,12 +2,79 @@ import Link from "next/link";
 import { BookingSlotPicker } from "@/components/booking-slot-picker";
 
 export default function BookPage() {
-  return <main className="booking-page">
-    <nav className="member-nav"><Link className="brand" href="/">Faith.In.Dance.</Link><div><Link href="/about">About</Link><Link href="/membership">Lessons + Tutorials</Link><Link href="/prayers">Prayers</Link></div><Link className="nav-button" href="/book">Book now</Link></nav>
-    <section className="booking-hero"><p className="eyebrow">August coaching weekend</p><h1>Make time<br /><em>to grow.</em></h1><p>For one weekend only, Faith is opening focused private in-person sessions for dancers who want help with a skill, technique, routine, audition, or the confidence to take their next step.</p><div className="booking-dates"><div><span>Saturday</span><strong>August 29</strong><small>8 AM–9 PM</small></div><div><span>Sunday</span><strong>August 30</strong><small>8 AM–3 PM</small></div></div><div className="booking-fit"><span>In-person coaching only</span><span>30 or 60 minutes</span><span>One or two dancers</span></div></section>
-    <section className="worship-class"><div><p className="eyebrow">Sunday special class</p><h2>Worship<br /><em>Dance Class.</em></h2><p>This class is all about using the gift of dance to worship and glorify God. We&apos;ll learn worship choreography, focus on dancing with meaning and emotion, and use movement as another way to praise God.</p><p>My hope is that you leave feeling encouraged, confident, and reminded of the beautiful gift God gave you to dance!</p></div><div className="worship-details"><p>Sunday, August 30</p><strong>8:00–9:00 AM</strong><span>In person · Laura Cote</span><b>$10</b><a className="button" href="#register-worship">Register for class <span>→</span></a></div></section>
-    <section className="session-pricing"><p className="eyebrow">Private coaching options</p><h2>Choose the session<br /><em>that fits best.</em></h2><div className="price-grid"><article><p>In person</p><h3>One dancer</h3><small>Focused one-on-one attention</small><div><span>1 hour</span><b>$50</b></div><div><span>30 minutes</span><b>$25</b></div></article><article><p>In person</p><h3>Two dancers</h3><small>Train side by side · price per dancer</small><div><span>1 hour</span><b>$30 each</b></div><div><span>30 minutes</span><b>$20 each</b></div></article></div></section>
-    <BookingSlotPicker />
-    <footer><Link className="brand" href="/">Faith.In.Dance.</Link><span>Dance with confidence.</span><span>© 2026 Faith.In.Dance.</span></footer>
-  </main>;
+  return (
+    <main className="booking-page">
+      <nav className="booking-nav" aria-label="Faith.In.Dance navigation">
+        <Link href="/" className="booking-wordmark">
+          FAITH<br />
+          <span>IN DANCE</span>
+        </Link>
+        <Link href="/" className="back-home">
+          ← Back to home
+        </Link>
+      </nav>
+
+      <section className="booking-hero">
+        <p className="eyebrow">September Zoom coaching</p>
+        <h1>
+          Make time
+          <br />
+          <em>to grow.</em>
+        </h1>
+        <p>
+          Faith is opening focused private Zoom sessions for dancers who want help
+          with a skill, technique, routine, audition, or the confidence to take
+          their next step.
+        </p>
+        <div className="booking-dates" aria-label="Available coaching dates">
+          <div>
+            <span>Thursday</span>
+            <strong>September 3</strong>
+            <small>5 PM–8 PM</small>
+          </div>
+          <div>
+            <span>Sunday</span>
+            <strong>September 6</strong>
+            <small>2 PM–7 PM</small>
+          </div>
+          <div>
+            <span>Monday</span>
+            <strong>September 7</strong>
+            <small>10 AM–12 PM</small>
+          </div>
+        </div>
+        <div className="booking-fit">
+          <span>Zoom coaching only</span>
+          <span>30 or 60 minutes</span>
+          <span>One or two dancers</span>
+        </div>
+      </section>
+
+      <section className="session-pricing" aria-label="Private lesson prices">
+        <div className="section-heading">
+          <p className="eyebrow">Private Zoom lessons</p>
+          <h2>Choose your session.</h2>
+        </div>
+        <div className="price-grid">
+          <article>
+            <p className="price-label">One dancer</p>
+            <p className="price">$40 <span>/ 30 min</span></p>
+            <p className="price">$70 <span>/ 60 min</span></p>
+          </article>
+          <article>
+            <p className="price-label">Two dancers</p>
+            <p className="price">$60 <span>/ 30 min</span></p>
+            <p className="price">$100 <span>/ 60 min</span></p>
+          </article>
+        </div>
+      </section>
+
+      <BookingSlotPicker />
+
+      <footer className="booking-footer">
+        <p>Faith.In.Dance. · Private coaching with purpose.</p>
+        <Link href="/">Return to home</Link>
+      </footer>
+    </main>
+  );
 }
