@@ -79,6 +79,7 @@ export function BookingSlotPicker() {
     setSaving(true);
     setStatus("");
     const form = new FormData(formElement);
+    const promoCode = String(form.get("promoCode") ?? "").trim();
     const response = await fetch("/api/bookings", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -102,6 +103,7 @@ export function BookingSlotPicker() {
       if (paymentUrl && data.bookingId) {
         const checkout = new URL(paymentUrl);
         checkout.searchParams.set("client_reference_id", data.bookingId);
+        if (promoCode) checkout.searchParams.set("prefilled_promo_code", promoCode);
         setStatus("Your time is saved. Taking you to secure payment…");
         window.location.assign(checkout.toString());
         return;
@@ -190,6 +192,7 @@ export function BookingSlotPicker() {
             <label>Email for Zoom link<input name="email" type="email" required placeholder="you@example.com" /></label>
             <label>Phone<input name="phone" type="tel" required placeholder="Phone number" /></label>
             <label>Dancer name<input name="dancerName" placeholder="Optional" /></label>
+            <label>Discount code<input name="promoCode" placeholder="Optional" /></label>
             <label>
               What would you like to work on?
               <select name="focus" required defaultValue="">
