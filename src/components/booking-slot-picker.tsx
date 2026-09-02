@@ -208,7 +208,6 @@ export function BookingSlotPicker() {
             {saving ? "Saving…" : "Save my Zoom lesson"} <span>→</span>
           </button>
           {status && <small className="booking-status">{status}</small>}
-          <small>Have code FAITH26? Enter it on Stripe&apos;s secure payment page for a 60-minute lesson: $30 for one dancer or $40 for two dancers.</small>
           <small>Your selected time is held while you complete secure payment.</small>
         </form>
       </section>
