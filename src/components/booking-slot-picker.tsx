@@ -4,6 +4,8 @@ import { FormEvent, useEffect, useMemo, useState } from "react";
 
 type Slot = { key: string; label: string };
 
+const reservedSlots = new Set(["2026-09-06T19:00", "2026-09-06T19:30"]);
+
 const privatePaymentUrls: Record<string, Record<number, string>> = {
   "zoom-one": {
     1: "https://buy.stripe.com/3cI3cvcfX26V8XX41E3cc01",
@@ -64,7 +66,7 @@ export function BookingSlotPicker() {
   const selectedKeys = useMemo(() => new Set(selected.map((slot) => slot.key)), [selected]);
 
   function toggleSlot(slot: Slot) {
-    if (booked.includes(slot.key)) return;
+    if (reservedSlots.has(slot.key) || booked.includes(slot.key)) return;
     setStatus("");
     setSelected((current) => {
       if (current.some((item) => item.key === slot.key)) {
@@ -143,7 +145,7 @@ export function BookingSlotPicker() {
                   const key = slotKey(day.date, time);
                   const slot = { key, label: `${day.label} · ${time}` };
                   const isSelected = selectedKeys.has(key);
-                  const isBooked = booked.includes(key);
+                  const isBooked = reservedSlots.has(key) || booked.includes(key);
                   return (
                     <button
                       type="button"
