@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 
 type Slot = { key: string; label: string };
 
@@ -53,6 +53,13 @@ export function BookingSlotPicker() {
   const [sessionType, setSessionType] = useState("zoom-one");
   const duration = selected.length * 30;
   const paymentUrl = privatePaymentUrls[sessionType]?.[selected.length];
+
+  useEffect(() => {
+    fetch("/api/bookings")
+      .then((response) => (response.ok ? response.json() : { bookedSlots: [] }))
+      .then((data) => setBooked(data.bookedSlots ?? []))
+      .catch(() => undefined);
+  }, []);
 
   const selectedKeys = useMemo(() => new Set(selected.map((slot) => slot.key)), [selected]);
 
