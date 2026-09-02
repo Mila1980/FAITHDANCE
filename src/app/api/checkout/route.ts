@@ -3,8 +3,8 @@ import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
 
 const prices = {
-  "zoom-one": { 1: 4000, 2: 7000 },
-  "zoom-two": { 1: 6000, 2: 10000 },
+  "zoom-one": { 1: 2500, 2: 5000 },
+  "zoom-two": { 1: 3000, 2: 6000 },
 } as const;
 
 function database() {

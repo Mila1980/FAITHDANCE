@@ -58,13 +58,13 @@ export default function BookPage() {
         <div className="price-grid">
           <article>
             <p className="price-label">One dancer</p>
-            <p className="price">$40 <span>/ 30 min</span></p>
-            <p className="price">$70 <span>/ 60 min</span></p>
+            <p className="price">$25 <span>/ 30 min</span></p>
+            <p className="price">$50 <span>/ 60 min</span></p>
           </article>
           <article>
             <p className="price-label">Two dancers</p>
-            <p className="price">$60 <span>/ 30 min</span></p>
-            <p className="price">$100 <span>/ 60 min</span></p>
+            <p className="price">$30 <span>/ 30 min</span></p>
+            <p className="price">$60 <span>/ 60 min</span></p>
           </article>
         </div>
       </section>
