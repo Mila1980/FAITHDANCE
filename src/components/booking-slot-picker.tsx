@@ -4,6 +4,17 @@ import { FormEvent, useMemo, useState } from "react";
 
 type Slot = { key: string; label: string };
 
+const privatePaymentUrls: Record<string, Record<number, string>> = {
+  "zoom-one": {
+    1: "https://buy.stripe.com/3cI3cvcfX26V8XX41E3cc01",
+    2: "https://buy.stripe.com/9B614n7ZHh1Pa21gOq3cc02",
+  },
+  "zoom-two": {
+    1: "https://buy.stripe.com/eVqfZhbbTbHv2zzdCe3cc03",
+    2: "https://buy.stripe.com/3cI28rdk1fXL4HH41E3cc04",
+  },
+};
+
 const availability = [
   {
     label: "Thursday, September 3",
@@ -41,6 +52,7 @@ export function BookingSlotPicker() {
   const [status, setStatus] = useState("");
   const [sessionType, setSessionType] = useState("zoom-one");
   const duration = selected.length * 30;
+  const paymentUrl = privatePaymentUrls[sessionType]?.[selected.length];
 
   const selectedKeys = useMemo(() => new Set(selected.map((slot) => slot.key)), [selected]);
 
@@ -67,6 +79,7 @@ export function BookingSlotPicker() {
     setSaving(true);
     setStatus("");
     const form = new FormData(formElement);
+    const promoCode = String(form.get("promoCode") ?? "").trim();
     const response = await fetch("/api/bookings", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -87,13 +100,20 @@ export function BookingSlotPicker() {
       setBooked((current) => [...current, ...selected.map((slot) => slot.key)]);
       setSelected([]);
       formElement.reset();
+      if (paymentUrl && data.bookingId && !promoCode) {
+        const checkout = new URL(paymentUrl);
+        checkout.searchParams.set("client_reference_id", data.bookingId);
+        setStatus("Your time is saved. Taking you to secure payment…");
+        window.location.assign(checkout.toString());
+        return;
+      }
       if (data.bookingId) {
         const checkoutResponse = await fetch("/api/checkout", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             bookingId: data.bookingId,
-            promoCode: form.get("promoCode"),
+            promoCode,
           }),
         });
         const checkoutData = await checkoutResponse.json().catch(() => ({}));
