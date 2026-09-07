@@ -69,6 +69,12 @@ export default function BookPage() {
         </div>
       </section>
 
+      <section className="booking-review">
+        <p className="eyebrow">Kind words from a Faith.In.Dance. family</p>
+        <blockquote>“I was a little apprehensive about Zoom dance lessons at first. Faith had my daughter working hard, having fun, and excited for the next lesson. She is so positive and uplifting, knows exactly when to encourage and when to push, and my daughter has made so much improvement working with Faith each week.”</blockquote>
+        <p>— Parent of a Faith.In.Dance. dancer</p>
+      </section>
+
       <BookingSlotPicker />
 
       <footer className="booking-footer">
