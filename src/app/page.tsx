@@ -44,6 +44,15 @@ export default function Home() {
         <Link className="button" href="/book">Book now <span>→</span></Link>
       </section>
 
+      <section className="home-review-banner">
+        <div>
+          <p className="eyebrow">Kind words</p>
+          <h2>Has your dancer worked with Faith?</h2>
+          <p>Your family&apos;s experience can encourage another dancer to take the next step with confidence.</p>
+        </div>
+        <Link className="button" href="/review">Share a review <span>→</span></Link>
+      </section>
+
       <section className="about section" id="about">
         <p className="eyebrow">Meet Faith</p>
         <div className="about-grid">
