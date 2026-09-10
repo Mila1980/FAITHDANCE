@@ -28,19 +28,19 @@ export default function BookPage() {
         </p>
         <div className="booking-dates" aria-label="Available coaching dates">
           <div>
-            <span>Thursday</span>
-            <strong>September 3</strong>
-            <small>5 PM–9 PM</small>
+            <span>Saturday</span>
+            <strong>September 12</strong>
+            <small>12 PM–4 PM</small>
           </div>
           <div>
             <span>Sunday</span>
-            <strong>September 6</strong>
-            <small>2 PM–8 PM</small>
+            <strong>September 13</strong>
+            <small>3 PM–8 PM</small>
           </div>
           <div>
-            <span>Monday</span>
-            <strong>September 7</strong>
-            <small>10 AM–1 PM</small>
+            <span>Sundays</span>
+            <strong>September 20 &amp; 27</strong>
+            <small>3 PM–8 PM</small>
           </div>
         </div>
         <div className="booking-fit">

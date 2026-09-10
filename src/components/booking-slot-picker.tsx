@@ -5,7 +5,7 @@ import { AvailabilityRequestForm } from "@/components/availability-request-form"
 
 type Slot = { key: string; label: string };
 
-const reservedSlots = new Set(["2026-09-06T19:00", "2026-09-06T19:30"]);
+const reservedSlots = new Set<string>();
 
 const privatePaymentUrls: Record<string, Record<number, string>> = {
   "zoom-one": {
@@ -20,22 +20,28 @@ const privatePaymentUrls: Record<string, Record<number, string>> = {
 
 const availability = [
   {
-    label: "Thursday, September 3",
-    date: "2026-09-03",
-    hours: "5:00–9:00 PM",
-    times: ["5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM", "8:00 PM", "8:30 PM"],
+    label: "Saturday, September 12",
+    date: "2026-09-12",
+    hours: "12:00–4:00 PM",
+    times: ["12:00 PM", "12:30 PM", "1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM"],
   },
   {
-    label: "Sunday, September 6",
-    date: "2026-09-06",
-    hours: "2:00–8:00 PM",
-    times: ["2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM", "5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM"],
+    label: "Sunday, September 13",
+    date: "2026-09-13",
+    hours: "3:00–8:00 PM",
+    times: ["3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM", "5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM"],
   },
   {
-    label: "Monday, September 7",
-    date: "2026-09-07",
-    hours: "10:00 AM–1:00 PM",
-    times: ["10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM"],
+    label: "Sunday, September 20",
+    date: "2026-09-20",
+    hours: "3:00–8:00 PM",
+    times: ["3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM", "5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM"],
+  },
+  {
+    label: "Sunday, September 27",
+    date: "2026-09-27",
+    hours: "3:00–8:00 PM",
+    times: ["3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM", "5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM"],
   },
 ] as const;
 

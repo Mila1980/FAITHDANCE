@@ -38,7 +38,7 @@ export default function Home() {
       <section className="home-booking-banner" aria-label="September Zoom lesson announcement">
         <div>
           <p className="eyebrow">Private Zoom lessons</p>
-          <h2>Dance with Faith<br /><em>September 3, 6 &amp; 7.</em></h2>
+          <h2>Dance with Faith<br /><em>September 12, 13, 20 &amp; 27.</em></h2>
           <p>Book a private Zoom lesson and receive your Zoom link by email after payment.</p>
         </div>
         <Link className="button" href="/book">Book now <span>→</span></Link>
