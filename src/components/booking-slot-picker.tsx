@@ -136,62 +136,6 @@ export function BookingSlotPicker() {
 
   return (
     <>
-      <section className="availability">
-        <p className="eyebrow">September availability</p>
-        <h2>
-          Choose every block
-          <br />
-          <em>you need.</em>
-        </h2>
-        <p className="availability-note">
-          Select a date, lesson length, and available start time. Booked times are
-          removed automatically. All lessons are held on Zoom.
-        </p>
-        <div className="booking-picker">
-          <label>
-            Choose a date
-            <select value={selectedDate} onChange={(event) => {
-              setSelectedDate(event.target.value);
-              setStartKey("");
-              setStatus("");
-            }}>
-              <option value="">Select a date</option>
-              {availability.map((day) => (
-                <option key={day.date} value={day.date}>{day.label} · {day.hours}</option>
-              ))}
-            </select>
-          </label>
-          <label>
-            Lesson length
-            <select value={lessonBlocks} onChange={(event) => {
-              setLessonBlocks(Number(event.target.value));
-              setStartKey("");
-              setStatus("");
-            }}>
-              <option value={1}>30 minutes</option>
-              <option value={2}>60 minutes</option>
-            </select>
-          </label>
-          <label>
-            Choose a start time
-            <select value={startKey} disabled={!selectedDate} onChange={(event) => {
-              setStartKey(event.target.value);
-              setStatus("");
-            }}>
-              <option value="">{selectedDate ? "Select an available time" : "Choose a date first"}</option>
-              {availableStarts.map((slot) => (
-                <option key={slot.key} value={slot.key}>{slot.time}</option>
-              ))}
-            </select>
-          </label>
-          {selectedDate && !availableStarts.length && (
-            <p className="booking-picker-empty">No {duration}-minute appointments remain on this date.</p>
-          )}
-        </div>
-      </section>
-
-      <AvailabilityRequestForm />
-
       <section className="booking-register" id="register">
         <div>
           <p className="eyebrow">Your booking</p>
@@ -201,8 +145,8 @@ export function BookingSlotPicker() {
             <em>that works.</em>
           </h2>
           <p>
-            Enter your email to save your Zoom lesson with Faith. After secure
-            payment, Faith will send the Zoom link to that email address.
+            Choose your date and time, then enter your details to save your Zoom
+            lesson. Faith will send the Zoom link after secure payment.
           </p>
           <label className="booking-session-label">
             Booking type
@@ -214,6 +158,47 @@ export function BookingSlotPicker() {
         </div>
 
         <form className="booking-summary" onSubmit={submit}>
+          <div className="booking-picker">
+            <label>
+              Choose a date
+              <select value={selectedDate} onChange={(event) => {
+                setSelectedDate(event.target.value);
+                setStartKey("");
+                setStatus("");
+              }}>
+                <option value="">Select a date</option>
+                {availability.map((day) => (
+                  <option key={day.date} value={day.date}>{day.label} · {day.hours}</option>
+                ))}
+              </select>
+            </label>
+            <label>
+              Lesson length
+              <select value={lessonBlocks} onChange={(event) => {
+                setLessonBlocks(Number(event.target.value));
+                setStartKey("");
+                setStatus("");
+              }}>
+                <option value={1}>30 minutes</option>
+                <option value={2}>60 minutes</option>
+              </select>
+            </label>
+            <label>
+              Choose a start time
+              <select value={startKey} disabled={!selectedDate} onChange={(event) => {
+                setStartKey(event.target.value);
+                setStatus("");
+              }}>
+                <option value="">{selectedDate ? "Select an available time" : "Choose a date first"}</option>
+                {availableStarts.map((slot) => (
+                  <option key={slot.key} value={slot.key}>{slot.time}</option>
+                ))}
+              </select>
+            </label>
+            {selectedDate && !availableStarts.length && (
+              <p className="booking-picker-empty">No {duration}-minute appointments remain on this date.</p>
+            )}
+          </div>
           <p>Your selected time</p>
           {selected.length ? (
             <>
@@ -221,7 +206,7 @@ export function BookingSlotPicker() {
               <ul>{selected.map((slot) => <li key={slot.key}>{slot.label}</li>)}</ul>
             </>
           ) : (
-            <span>Choose one or two time blocks above.</span>
+            <span>Choose your date, lesson length, and start time.</span>
           )}
           <div className="booking-details">
             <label>Parent / dancer name<input name="name" required placeholder="Your name" /></label>
@@ -241,6 +226,8 @@ export function BookingSlotPicker() {
           <small>Your selected time is held while you complete secure payment.</small>
         </form>
       </section>
+
+      <AvailabilityRequestForm />
     </>
   );
 }
