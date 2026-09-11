@@ -4,14 +4,9 @@ import { BookingSlotPicker } from "@/components/booking-slot-picker";
 export default function BookPage() {
   return (
     <main className="booking-page">
-      <nav className="booking-nav" aria-label="Faith.In.Dance navigation">
-        <Link href="/" className="booking-wordmark">
-          FAITH<br />
-          <span>IN DANCE</span>
-        </Link>
-        <Link href="/" className="back-home">
-          ← Back to home
-        </Link>
+      <nav className="member-nav booking-nav" aria-label="Faith.In.Dance navigation">
+        <Link href="/" className="brand">Faith.In.Dance.</Link>
+        <Link href="/" className="nav-button">Back to home</Link>
       </nav>
 
       <section className="booking-hero">
