@@ -1,4 +1,12 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Online Dance Tutorials & Membership",
+  description: "Explore supportive online dance tutorials for cartwheels, leaps, turns, technique, control, confidence, and purposeful at-home practice.",
+  alternates: { canonical: "/membership" },
+  openGraph: { url: "/membership", title: "Online Dance Tutorials & Membership", description: "Build stronger dance foundations with supportive skill breakdowns and at-home practice guidance." },
+};
 
 const tutorialPreviews = [
   ["01", "Foundation", "Cartwheel.", "Build a confident, clean cartwheel from the ground up."],

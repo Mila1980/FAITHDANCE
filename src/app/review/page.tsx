@@ -1,5 +1,11 @@
 import Link from "next/link";
 import { ReviewForm } from "@/components/review-form";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Share Your Experience",
+  robots: { index: false, follow: false },
+};
 
 export default function ReviewPage() {
   return (

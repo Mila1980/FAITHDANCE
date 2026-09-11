@@ -1,5 +1,13 @@
 import Link from "next/link";
 import { BookingSlotPicker } from "@/components/booking-slot-picker";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Book Private Online Dance Lessons",
+  description: "Book a private 30- or 60-minute Zoom dance lesson with Faith for personalized technique, tricks, auditions, routines, and performance coaching.",
+  alternates: { canonical: "/book" },
+  openGraph: { url: "/book", title: "Book Private Online Dance Lessons", description: "Choose an available time for supportive, personalized Zoom dance coaching with Faith." },
+};
 
 export default function BookPage() {
   return (

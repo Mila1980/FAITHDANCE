@@ -1,6 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { PrayerPrintButton } from "@/components/prayer-print-button";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Christian Prayers for Dancers",
+  description: "Free printable Christian prayers for dancers facing auditions, competitions, anxiety, pressure, comparison, and difficult days.",
+  alternates: { canonical: "/prayers" },
+  openGraph: { url: "/prayers", title: "Christian Prayers for Dancers", description: "Printable prayers offering faith, strength, confidence, and encouragement for dancers." },
+};
 
 const prayers = [
   ["Prayer for all dancers", "prayer-for-all-dancers.png"], ["All things through Christ", "prayer-for-strength.png"], ["Prayer for anxiety", "prayer-for-anxiety.png"], ["Prayer before taking the stage", "before-taking-the-stage.png"], ["You are more than dance", "graceful-strength.png"], ["Love in every deed", "love-in-every-deed.png"], ["Faith over sight", "faith-over-sight.png"], ["Let them praise through dancing", "praise-through-dancing.png"], ["Dance prayer", "dance-prayer.png"],

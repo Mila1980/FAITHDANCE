@@ -1,5 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Meet Faith — Online Dance Coach",
+  description: "Meet Faith, a former Division I dancer, UDA National Jazz Champion, professional NBA dancer, educator, and supportive private dance coach.",
+  alternates: { canonical: "/about" },
+  openGraph: { url: "/about", title: "Meet Faith — Online Dance Coach", description: "Learn about Faith's elite dance experience, education background, and heart for building confident dancers." },
+};
 
 export default function AboutPage() {
   return <main className="about-page about-full-page">
