@@ -1,7 +1,6 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
-import { AvailabilityRequestForm } from "@/components/availability-request-form";
 
 type Slot = { key: string; label: string };
 
@@ -226,8 +225,6 @@ export function BookingSlotPicker() {
           <small>Your selected time is held while you complete secure payment.</small>
         </form>
       </section>
-
-      <AvailabilityRequestForm />
     </>
   );
 }
