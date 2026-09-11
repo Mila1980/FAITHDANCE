@@ -55,13 +55,13 @@ function slotKey(date: string, time: string) {
 }
 
 export function BookingSlotPicker() {
-  const [selected, setSelected] = useState<Slot[]>([]);
   const [booked, setBooked] = useState<string[]>([]);
   const [saving, setSaving] = useState(false);
   const [status, setStatus] = useState("");
   const [sessionType, setSessionType] = useState("zoom-one");
-  const duration = selected.length * 30;
-  const paymentUrl = privatePaymentUrls[sessionType]?.[selected.length];
+  const [selectedDate, setSelectedDate] = useState("");
+  const [startKey, setStartKey] = useState("");
+  const [lessonBlocks, setLessonBlocks] = useState(1);
 
   useEffect(() => {
     fetch("/api/bookings")
@@ -70,22 +70,27 @@ export function BookingSlotPicker() {
       .catch(() => undefined);
   }, []);
 
-  const selectedKeys = useMemo(() => new Set(selected.map((slot) => slot.key)), [selected]);
-
-  function toggleSlot(slot: Slot) {
-    if (reservedSlots.has(slot.key) || booked.includes(slot.key)) return;
-    setStatus("");
-    setSelected((current) => {
-      if (current.some((item) => item.key === slot.key)) {
-        return current.filter((item) => item.key !== slot.key);
-      }
-      if (current.length >= 2) {
-        setStatus("Choose up to two blocks for a 60-minute Zoom lesson.");
-        return current;
-      }
-      return [...current, slot];
-    });
-  }
+  const chosenDay = availability.find((day) => day.date === selectedDate);
+  const daySlots = useMemo(
+    () => chosenDay?.times.map((time) => ({
+      key: slotKey(chosenDay.date, time),
+      label: `${chosenDay.label} · ${time}`,
+      time,
+    })) ?? [],
+    [chosenDay],
+  );
+  const availableStarts = daySlots.filter((slot, index) => {
+    const needed = daySlots.slice(index, index + lessonBlocks);
+    return needed.length === lessonBlocks && needed.every(
+      (item) => !reservedSlots.has(item.key) && !booked.includes(item.key),
+    );
+  });
+  const startIndex = daySlots.findIndex((slot) => slot.key === startKey);
+  const selected: Slot[] = startIndex >= 0
+    ? daySlots.slice(startIndex, startIndex + lessonBlocks).map(({ key, label }) => ({ key, label }))
+    : [];
+  const duration = lessonBlocks * 30;
+  const paymentUrl = privatePaymentUrls[sessionType]?.[lessonBlocks];
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -113,7 +118,7 @@ export function BookingSlotPicker() {
 
     if (response.ok) {
       setBooked((current) => [...current, ...selected.map((slot) => slot.key)]);
-      setSelected([]);
+      setStartKey("");
       formElement.reset();
       if (paymentUrl && data.bookingId) {
         const checkout = new URL(paymentUrl);
@@ -139,35 +144,49 @@ export function BookingSlotPicker() {
           <em>you need.</em>
         </h2>
         <p className="availability-note">
-          Every button is a 30-minute block. Choose one for a 30-minute lesson or
-          two for one hour. All lessons are held on Zoom.
+          Select a date, lesson length, and available start time. Booked times are
+          removed automatically. All lessons are held on Zoom.
         </p>
-        <div className="day-grid">
-          {availability.map((day) => (
-            <article className="day-card" key={day.date}>
-              <p>{day.label}</p>
-              <span>{day.hours}</span>
-              <div className="time-grid">
-                {day.times.map((time) => {
-                  const key = slotKey(day.date, time);
-                  const slot = { key, label: `${day.label} · ${time}` };
-                  const isSelected = selectedKeys.has(key);
-                  const isBooked = reservedSlots.has(key) || booked.includes(key);
-                  return (
-                    <button
-                      type="button"
-                      key={key}
-                      className={isSelected ? "is-selected" : ""}
-                      disabled={isBooked}
-                      onClick={() => toggleSlot(slot)}
-                    >
-                      {isBooked ? "Booked" : time}
-                    </button>
-                  );
-                })}
-              </div>
-            </article>
-          ))}
+        <div className="booking-picker">
+          <label>
+            Choose a date
+            <select value={selectedDate} onChange={(event) => {
+              setSelectedDate(event.target.value);
+              setStartKey("");
+              setStatus("");
+            }}>
+              <option value="">Select a date</option>
+              {availability.map((day) => (
+                <option key={day.date} value={day.date}>{day.label} · {day.hours}</option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Lesson length
+            <select value={lessonBlocks} onChange={(event) => {
+              setLessonBlocks(Number(event.target.value));
+              setStartKey("");
+              setStatus("");
+            }}>
+              <option value={1}>30 minutes</option>
+              <option value={2}>60 minutes</option>
+            </select>
+          </label>
+          <label>
+            Choose a start time
+            <select value={startKey} disabled={!selectedDate} onChange={(event) => {
+              setStartKey(event.target.value);
+              setStatus("");
+            }}>
+              <option value="">{selectedDate ? "Select an available time" : "Choose a date first"}</option>
+              {availableStarts.map((slot) => (
+                <option key={slot.key} value={slot.key}>{slot.time}</option>
+              ))}
+            </select>
+          </label>
+          {selectedDate && !availableStarts.length && (
+            <p className="booking-picker-empty">No {duration}-minute appointments remain on this date.</p>
+          )}
         </div>
       </section>
 

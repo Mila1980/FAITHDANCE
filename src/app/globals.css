@@ -76,6 +76,8 @@ h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; font-weight: 600; l
 /* August booking is in person only. */
 .booking-page .price-grid { grid-template-columns: repeat(2, 1fr); }
 .time-grid button:disabled { cursor: not-allowed; opacity: .48; text-decoration: line-through; }.booking-details { display: grid; gap: .7rem; }.booking-details label { display: grid; gap: .35rem; color: #bd748a; font-size: .6rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }.booking-details input, .booking-details textarea { box-sizing: border-box; width: 100%; border: 1px solid #efd5d2; background: #fff7f2; color: #9d6172; padding: .7rem; font: .78rem Arial, sans-serif; resize: vertical; }.booking-status { color: #a36f7c !important; font-size: .72rem !important; line-height: 1.45; }
+.booking-picker { background: #fffaf5; border: 1px solid #efd5d2; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2.5rem; max-width: 900px; padding: clamp(1.3rem, 3vw, 2rem); }.booking-picker label { color: #bd748a; display: grid; font-size: .6rem; font-weight: 800; gap: .55rem; letter-spacing: .09em; text-transform: uppercase; }.booking-picker select { appearance: none; background: #fff7f2; border: 1px solid #e7c2c5; border-radius: 0; color: #9d6172; cursor: pointer; font: .82rem Arial, sans-serif; min-height: 3rem; padding: .8rem; text-transform: none; }.booking-picker select:disabled { cursor: not-allowed; opacity: .55; }.booking-picker-empty { color: #a36f7c; font-size: .72rem; grid-column: 1 / -1; margin: 0; }
+@media (max-width: 720px) { .booking-picker { grid-template-columns: 1fr; } }
 
 /* Phone layout: keep every heading and control inside the visible viewport. */
 html, body { max-width: 100%; overflow-x: clip; }
