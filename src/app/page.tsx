@@ -17,14 +17,14 @@ export default function Home() {
           <div className="nav-links">
             <Link href="/about">About</Link><Link href="/membership">Lessons + Tutorials</Link><Link href="/prayers">Prayers</Link><Link href="/book">Book</Link>
           </div>
-          <Link className="nav-button" href="/book">Book now</Link>
+          <Link className="nav-button" href="/book">Lesson updates</Link>
         </nav>
         <div className="hero-grid">
           <div className="hero-copy">
             <p className="eyebrow">Private Zoom dance coaching</p>
             <h1>Putting meaning in <em>motion.</em></h1>
             <p className="intro">Thoughtful, one-on-one Zoom coaching that helps every dancer feel capable, grounded, and confident—wherever they are.</p>
-            <div className="actions"><Link className="button" href="/book">Book a Zoom lesson <span>→</span></Link><Link className="text-link" href="/membership">Explore membership</Link></div>
+            <div className="actions"><Link className="button" href="/book">Explore private lessons <span>→</span></Link><Link className="text-link" href="/membership">Explore membership</Link></div>
           </div>
           <div className="hero-photo-stack" aria-label="Faith's dance journey">
             <div className="hero-photo hero-photo-baby"><Image src="/images/faith-baby.jpeg" alt="Faith as a young dancer" fill sizes="(max-width: 720px) 38vw, 220px" priority /></div>
@@ -35,13 +35,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="home-booking-banner" aria-label="September Zoom lesson announcement">
+      <section className="home-booking-banner" aria-label="Upcoming private lessons">
         <div>
-          <p className="eyebrow">Private Zoom lessons</p>
-          <h2>Dance with Faith<br /><em>September 12, 13, 20 &amp; 27.</em></h2>
-          <p>Book a private Zoom lesson and receive your Zoom link by email after payment.</p>
+          <p className="eyebrow">Private dance lessons</p>
+          <h2>In-person and Zoom lessons<br /><em>are coming soon!</em></h2>
+          <p>Booking dates will be announced here as availability opens.</p>
         </div>
-        <Link className="button" href="/book">Book now <span>→</span></Link>
+        <Link className="button" href="/book">Lesson updates <span>→</span></Link>
       </section>
 
       <section className="about section" id="about">

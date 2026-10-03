@@ -1,12 +1,11 @@
 import Link from "next/link";
-import { BookingSlotPicker } from "@/components/booking-slot-picker";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Book Private Online Dance Lessons",
-  description: "Book a private 30- or 60-minute Zoom dance lesson with Faith for personalized technique, tricks, auditions, routines, and performance coaching.",
+  title: "Private Dance Lessons Coming Soon",
+  description: "In-person and Zoom lessons are coming soon! Booking dates will be announced here as availability opens.",
   alternates: { canonical: "/book" },
-  openGraph: { url: "/book", title: "Book Private Online Dance Lessons", description: "Choose an available time for supportive, personalized Zoom dance coaching with Faith." },
+  openGraph: { url: "/book", title: "Book Private Online Dance Lessons", description: "In-person and Zoom lessons are coming soon! Booking dates will be announced here as availability opens." },
 };
 
 export default function BookPage() {
@@ -18,36 +17,11 @@ export default function BookPage() {
       </nav>
 
       <section className="booking-hero">
-        <p className="eyebrow">September Zoom coaching</p>
-        <h1>
-          Make time
-          <br />
-          <em>to grow.</em>
-        </h1>
-        <p>
-          Faith is opening focused private Zoom sessions for dancers who want help
-          with a skill, technique, routine, audition, or the confidence to take
-          their next step.
-        </p>
-        <div className="booking-dates" aria-label="Available coaching dates">
-          <div>
-            <span>Saturday</span>
-            <strong>September 12</strong>
-            <small>12 PM–4 PM</small>
-          </div>
-          <div>
-            <span>Sunday</span>
-            <strong>September 13</strong>
-            <small>3 PM–8 PM</small>
-          </div>
-          <div>
-            <span>Sundays</span>
-            <strong>September 20 &amp; 27</strong>
-            <small>3 PM–8 PM</small>
-          </div>
-        </div>
+        <p className="eyebrow">Private dance lessons</p>
+        <h1>In-person and Zoom lessons<br /><em>are coming soon!</em></h1>
+        <p>Booking dates will be announced here as availability opens.</p>
         <div className="booking-fit">
-          <span>Zoom coaching only</span>
+          <span>In-person and Zoom lessons</span>
           <span>30 or 60 minutes</span>
           <span>One or two dancers</span>
         </div>
@@ -56,7 +30,7 @@ export default function BookPage() {
       <section className="session-pricing" aria-label="Private lesson prices">
         <div className="section-heading">
           <p className="eyebrow">Private Zoom lessons</p>
-          <h2>Choose your session.</h2>
+          <h2>Zoom lesson pricing.</h2>
         </div>
         <div className="price-grid">
           <article>
@@ -78,7 +52,10 @@ export default function BookPage() {
         <p>— Parent of a Faith.In.Dance. dancer</p>
       </section>
 
-      <BookingSlotPicker />
+      <section className="booking-review">
+        <p>Have a question about future lessons?</p>
+        <Link className="button" href="/#contact">Contact Faith <span>→</span></Link>
+      </section>
 
       <footer className="booking-footer">
         <p>Faith.In.Dance. · Private coaching with purpose.</p>
