@@ -1,11 +1,12 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { BookingSlotPicker } from "@/components/booking-slot-picker";
 
 export const metadata: Metadata = {
-  title: "Private Dance Lessons Coming Soon",
-  description: "In-person and Zoom lessons are coming soon! Booking dates will be announced here as availability opens.",
+  title: "Book In-Person Dance Lessons | October 2026",
+  description: "Book an in-person dance lesson on October 9 or October 12, 2026. Choose an available half-hour slot.",
   alternates: { canonical: "/book" },
-  openGraph: { url: "/book", title: "Book Private Online Dance Lessons", description: "In-person and Zoom lessons are coming soon! Booking dates will be announced here as availability opens." },
+  openGraph: { url: "/book", title: "Book In-Person Dance Lessons", description: "Choose an available half-hour dance lesson on October 9 or October 12, 2026." },
 };
 
 export default function BookPage() {
@@ -18,19 +19,22 @@ export default function BookPage() {
 
       <section className="booking-hero">
         <p className="eyebrow">Private dance lessons</p>
-        <h1>In-person and Zoom lessons<br /><em>are coming soon!</em></h1>
-        <p>Booking dates will be announced here as availability opens.</p>
+        <h1>In-person dance lessons<br /><em>October 9 + 12</em></h1>
+        <p>Choose a half-hour appointment. Booked times are shown and cannot be selected.</p>
+        <div className="booking-dates"><div><span>Friday, October 9</span><strong>11:30 AM&ndash;3:00 PM</strong></div><div><span>Monday, October 12</span><strong>8:00 AM&ndash;12:00 PM</strong></div></div>
         <div className="booking-fit">
-          <span>In-person and Zoom lessons</span>
+          <span>In-person lessons</span>
           <span>30 or 60 minutes</span>
           <span>One or two dancers</span>
         </div>
       </section>
 
+      <BookingSlotPicker />
+
       <section className="session-pricing" aria-label="Private lesson prices">
         <div className="section-heading">
-          <p className="eyebrow">Private Zoom lessons</p>
-          <h2>Zoom lesson pricing.</h2>
+          <p className="eyebrow">Private lessons</p>
+          <h2>Lesson pricing.</h2>
         </div>
         <div className="price-grid">
           <article>

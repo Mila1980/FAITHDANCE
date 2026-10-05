@@ -35,7 +35,7 @@ export async function GET(request: Request) {
 
   const { data: bookings, error } = await supabase
     .from("faith_bookings")
-    .select("id,name,email,dancer_name,notes,requested_slots")
+    .select("id,name,email,dancer_name,notes,requested_slots,session_type")
     .eq("status", "confirmed")
     .eq("payment_status", "paid");
   if (error) return NextResponse.json({ error: "Could not load confirmed bookings." }, { status: 500 });
@@ -53,7 +53,7 @@ export async function GET(request: Request) {
         to: [booking.email],
         replyTo: faithEmail,
         subject: "Would you share a few words about your lesson with Faith?",
-        html: `<p>Hi ${String(booking.name).replace(/[&<>\"]/g, "")},</p><p>Thank you for dancing with Faith.In.Dance. If you and ${booking.dancer_name ? `${String(booking.dancer_name).replace(/[&<>\"]/g, "")} ` : "your dancer "}enjoyed your Zoom lesson, would you share a few words about the experience?</p><p><a href="${reviewLink}">Share your review</a></p><p>Your note helps other families feel confident taking the next step. Thank you so much.</p><p>With love,<br>Faith.In.Dance.</p>`,
+        html: `<p>Hi ${String(booking.name).replace(/[&<>\"]/g, "")},</p><p>Thank you for dancing with Faith.In.Dance. If you and ${booking.dancer_name ? `${String(booking.dancer_name).replace(/[&<>\"]/g, "")} ` : "your dancer "}enjoyed your ${String(booking.session_type ?? "").startsWith("in-person") ? "in-person lesson" : "Zoom lesson"}, would you share a few words about the experience?</p><p><a href="${reviewLink}">Share your review</a></p><p>Your note helps other families feel confident taking the next step. Thank you so much.</p><p>With love,<br>Faith.In.Dance.</p>`,
       });
       const notes = `${booking.notes ? `${booking.notes}\n\n` : ""}${sentMarker}`;
       await supabase.from("faith_bookings").update({ notes }).eq("id", booking.id);

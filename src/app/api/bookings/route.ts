@@ -1,23 +1,8 @@
 import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
+import { unavailableBookingSlotKeys, validBookingSlotKeys } from "@/lib/booking-availability";
 
-const validSlotKeys = new Set([
-  "2026-09-12T12:00", "2026-09-12T12:30", "2026-09-12T13:00",
-  "2026-09-12T13:30", "2026-09-12T14:00", "2026-09-12T14:30",
-  "2026-09-12T15:00", "2026-09-12T15:30",
-  "2026-09-13T15:00", "2026-09-13T15:30", "2026-09-13T16:00",
-  "2026-09-13T16:30", "2026-09-13T17:00", "2026-09-13T17:30",
-  "2026-09-13T18:00", "2026-09-13T18:30", "2026-09-13T19:00",
-  "2026-09-13T19:30",
-  "2026-09-20T15:00", "2026-09-20T15:30", "2026-09-20T16:00",
-  "2026-09-20T16:30", "2026-09-20T17:00", "2026-09-20T17:30",
-  "2026-09-20T18:00", "2026-09-20T18:30", "2026-09-20T19:00",
-  "2026-09-20T19:30",
-  "2026-09-27T15:00", "2026-09-27T15:30", "2026-09-27T16:00",
-  "2026-09-27T16:30", "2026-09-27T17:00", "2026-09-27T17:30",
-  "2026-09-27T18:00", "2026-09-27T18:30", "2026-09-27T19:00",
-  "2026-09-27T19:30",
-]);
+const validSlotKeys = new Set(validBookingSlotKeys);
 
 function database() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -55,7 +40,7 @@ export async function POST(request: Request) {
   const body = await request.json();
   const slots = Array.isArray(body.slots) ? body.slots : [];
   const validSlots = slots.every(
-    (slot: { key?: unknown }) => typeof slot.key === "string" && validSlotKeys.has(slot.key),
+    (slot: { key?: unknown }) => typeof slot.key === "string" && validSlotKeys.has(slot.key) && !unavailableBookingSlotKeys.has(slot.key),
   );
 
   if (!body.name || !body.email || !body.phone || !slots.length || !validSlots) {

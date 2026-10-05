@@ -1,12 +1,15 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
+import { bookingAvailability, bookingSlotKey, unavailableBookingSlotKeys } from "@/lib/booking-availability";
 
 type Slot = { key: string; label: string };
 
 const reservedSlots = new Set<string>();
 
 const privatePaymentUrls: Record<string, Record<number, string>> = {
+  "in-person-one": { 1: "https://buy.stripe.com/3cI3cvcfX26V8XX41E3cc01", 2: "https://buy.stripe.com/9B614n7ZHh1Pa21gOq3cc02" },
+  "in-person-two": { 1: "https://buy.stripe.com/eVqfZhbbTbHv2zzdCe3cc03", 2: "https://buy.stripe.com/3cI28rdk1fXL4HH41E3cc04" },
   "zoom-one": {
     1: "https://buy.stripe.com/3cI3cvcfX26V8XX41E3cc01",
     2: "https://buy.stripe.com/9B614n7ZHh1Pa21gOq3cc02",
@@ -17,47 +20,13 @@ const privatePaymentUrls: Record<string, Record<number, string>> = {
   },
 };
 
-const availability = [
-  {
-    label: "Saturday, September 12",
-    date: "2026-09-12",
-    hours: "12:00–4:00 PM",
-    times: ["12:00 PM", "12:30 PM", "1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM"],
-  },
-  {
-    label: "Sunday, September 13",
-    date: "2026-09-13",
-    hours: "3:00–8:00 PM",
-    times: ["3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM", "5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM"],
-  },
-  {
-    label: "Sunday, September 20",
-    date: "2026-09-20",
-    hours: "3:00–8:00 PM",
-    times: ["3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM", "5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM"],
-  },
-  {
-    label: "Sunday, September 27",
-    date: "2026-09-27",
-    hours: "3:00–8:00 PM",
-    times: ["3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM", "5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM"],
-  },
-] as const;
 
-function slotKey(date: string, time: string) {
-  const [clock, meridiem] = time.split(" ");
-  const [hourText, minute] = clock.split(":");
-  let hour = Number(hourText);
-  if (meridiem === "PM" && hour !== 12) hour += 12;
-  if (meridiem === "AM" && hour === 12) hour = 0;
-  return `${date}T${String(hour).padStart(2, "0")}:${minute}`;
-}
 
 export function BookingSlotPicker() {
   const [booked, setBooked] = useState<string[]>([]);
   const [saving, setSaving] = useState(false);
   const [status, setStatus] = useState("");
-  const [sessionType, setSessionType] = useState("zoom-one");
+  const [sessionType, setSessionType] = useState("in-person-one");
   const [selectedDate, setSelectedDate] = useState("");
   const [startKey, setStartKey] = useState("");
   const [lessonBlocks, setLessonBlocks] = useState(1);
@@ -69,21 +38,23 @@ export function BookingSlotPicker() {
       .catch(() => undefined);
   }, []);
 
-  const chosenDay = availability.find((day) => day.date === selectedDate);
+  const chosenDay = bookingAvailability.find((day) => day.date === selectedDate);
   const daySlots = useMemo(
     () => chosenDay?.times.map((time) => ({
-      key: slotKey(chosenDay.date, time),
+      key: bookingSlotKey(chosenDay.date, time),
       label: `${chosenDay.label} · ${time}`,
       time,
     })) ?? [],
     [chosenDay],
   );
-  const availableStarts = daySlots.filter((slot, index) => {
+  const startAvailability = daySlots.map((slot, index) => {
     const needed = daySlots.slice(index, index + lessonBlocks);
-    return needed.length === lessonBlocks && needed.every(
-      (item) => !reservedSlots.has(item.key) && !booked.includes(item.key),
+    const blocked = needed.length !== lessonBlocks || needed.some((item) =>
+      unavailableBookingSlotKeys.has(item.key) || reservedSlots.has(item.key) || booked.includes(item.key),
     );
+    return { ...slot, blocked };
   });
+  const availableStarts = startAvailability.filter((slot) => !slot.blocked);
   const startIndex = daySlots.findIndex((slot) => slot.key === startKey);
   const selected: Slot[] = startIndex >= 0
     ? daySlots.slice(startIndex, startIndex + lessonBlocks).map(({ key, label }) => ({ key, label }))
@@ -144,14 +115,13 @@ export function BookingSlotPicker() {
             <em>that works.</em>
           </h2>
           <p>
-            Choose your date and time, then enter your details to save your Zoom
-            lesson. Faith will send the Zoom link after secure payment.
+            Choose an in-person date and time, then enter your details to reserve your lesson.
           </p>
           <label className="booking-session-label">
             Booking type
             <select value={sessionType} onChange={(event) => setSessionType(event.target.value)}>
-              <option value="zoom-one">Zoom lesson · one dancer</option>
-              <option value="zoom-two">Zoom lesson · two dancers</option>
+              <option value="in-person-one">In-person lesson: one dancer</option>
+              <option value="in-person-two">In-person lesson: two dancers</option>
             </select>
           </label>
         </div>
@@ -166,7 +136,7 @@ export function BookingSlotPicker() {
                 setStatus("");
               }}>
                 <option value="">Select a date</option>
-                {availability.map((day) => (
+                {bookingAvailability.map((day) => (
                   <option key={day.date} value={day.date}>{day.label} · {day.hours}</option>
                 ))}
               </select>
@@ -189,8 +159,8 @@ export function BookingSlotPicker() {
                 setStatus("");
               }}>
                 <option value="">{selectedDate ? "Select an available time" : "Choose a date first"}</option>
-                {availableStarts.map((slot) => (
-                  <option key={slot.key} value={slot.key}>{slot.time}</option>
+                {startAvailability.map((slot) => (
+                  <option key={slot.key} value={slot.key} disabled={slot.blocked} style={slot.blocked ? { textDecoration: "line-through" } : undefined}>{slot.time}{slot.blocked ? " (Booked)" : ""}</option>
                 ))}
               </select>
             </label>
@@ -209,7 +179,7 @@ export function BookingSlotPicker() {
           )}
           <div className="booking-details">
             <label>Parent / dancer name<input name="name" required placeholder="Your name" /></label>
-            <label>Email for Zoom link<input name="email" type="email" required placeholder="you@example.com" /></label>
+            <label>Email for booking details<input name="email" type="email" required placeholder="you@example.com" /></label>
             <label>Phone<input name="phone" type="tel" required placeholder="Phone number" /></label>
             <label>Dancer name<input name="dancerName" placeholder="Optional" /></label>
             <label>Discount code<input name="promoCode" placeholder="Optional" /></label>
@@ -219,7 +189,7 @@ export function BookingSlotPicker() {
             </label>
           </div>
           <button type="submit" className="button" disabled={!selected.length || saving}>
-            {saving ? "Saving…" : "Save my Zoom lesson"} <span>→</span>
+            {saving ? "Saving…" : "Continue to payment"} <span>→</span>
           </button>
           {status && <small className="booking-status">{status}</small>}
           <small>Your selected time is held while you complete secure payment.</small>

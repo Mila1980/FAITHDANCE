@@ -38,10 +38,10 @@ export default function Home() {
       <section className="home-booking-banner" aria-label="Upcoming private lessons">
         <div>
           <p className="eyebrow">Private dance lessons</p>
-          <h2>In-person and Zoom lessons<br /><em>are coming soon!</em></h2>
-          <p>Booking dates will be announced here as availability opens.</p>
+          <h2>In-person lessons<br /><em>October 9 + 12</em></h2>
+          <p>Friday, October 9: 11:30 AM to 3:00 PM<br />Monday, October 12: 8:00 AM to 12:00 PM<br />Half-hour appointments. Some times are already booked.</p>
         </div>
-        <Link className="button" href="/book">Lesson updates <span>→</span></Link>
+        <Link className="button" href="/book">Choose a time <span>→</span></Link>
       </section>
 
       <section className="about section" id="about">
