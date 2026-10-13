@@ -1,6 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
-import { unavailableBookingSlotKeys, validBookingSlotKeys } from "@/lib/booking-availability";
+import { areConsecutiveBookingSlots, unavailableBookingSlotKeys, validBookingSlotKeys } from "@/lib/booking-availability";
 
 const validSlotKeys = new Set(validBookingSlotKeys);
 
@@ -41,7 +41,7 @@ export async function POST(request: Request) {
   const slots = Array.isArray(body.slots) ? body.slots : [];
   const validSlots = slots.every(
     (slot: { key?: unknown }) => typeof slot.key === "string" && validSlotKeys.has(slot.key) && !unavailableBookingSlotKeys.has(slot.key),
-  );
+  ) && slots.length >= 1 && slots.length <= 2 && areConsecutiveBookingSlots(slots.map((slot: { key: string }) => slot.key));
 
   if (!body.name || !body.email || !body.phone || !slots.length || !validSlots) {
     return NextResponse.json(

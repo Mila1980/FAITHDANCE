@@ -10,7 +10,10 @@ async function sendPaidBookingEmails(booking: { name: string; email: string; pho
   const key = process.env.RESEND_API_KEY;
   if (!key) return;
   const isWorship = booking.session_type === "worship-class";
-  const details = isWorship ? "Sunday Worship Dance Class<br>Sunday, August 30 · 8:00–9:00 AM<br>Laura Cote School of Dance · $10" : (booking.requested_slots ?? []).map((slot) => safe(slot.label)).join("<br>");
+  const isZoom = booking.session_type.startsWith("zoom-");
+  const details = isWorship
+    ? "Sunday Worship Dance Class<br>Sunday, August 30 · 8:00–9:00 AM<br>Laura Cote School of Dance · $10"
+    : `${isZoom ? "Private Zoom lesson<br>" : ""}${(booking.requested_slots ?? []).map((slot) => safe(slot.label)).join("<br>")}`;
   const resend = new Resend(key);
   try { await Promise.all([
     resend.emails.send({ from: "Faith.In.Dance. <faithelarose@faithindance.com>", to: [booking.email], replyTo: faithEmail, subject: "Your Faith.In.Dance booking is confirmed", html: `<p>Hi ${safe(booking.name)},</p><p>Your payment was received and your booking is confirmed:</p><p><strong>${details}</strong></p><p>Faith will follow up with any final details.</p><p>With love,<br>Faith.In.Dance.</p>` }),

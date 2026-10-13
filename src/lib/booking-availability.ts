@@ -25,20 +25,46 @@ export function bookingSlotKey(date: string, time: string) {
   return `${date}T${String(hour).padStart(2, "0")}:${minute}`;
 }
 
+export function areConsecutiveBookingSlots(keys: string[]) {
+  return keys.every((key, index) => {
+    if (index === 0) return true;
+    const previous = keys[index - 1];
+    const [date, clock] = previous.split("T");
+    const [hour, minute] = clock.split(":").map(Number);
+    const nextMinutes = hour * 60 + minute + 30;
+    const nextKey = `${date}T${String(Math.floor(nextMinutes / 60)).padStart(2, "0")}:${String(nextMinutes % 60).padStart(2, "0")}`;
+    return key === nextKey;
+  });
+}
+
 export const bookingAvailability: BookingDate[] = [
   {
-    label: "Friday, October 9, 2026",
-    date: "2026-10-09",
-    hours: "11:30 AM–3:00 PM",
-    times: halfHours(11 * 60 + 30, 15 * 60),
-    bookedTimes: ["11:30 AM", "12:00 PM", "1:30 PM", "2:00 PM"],
+    label: "Thursday, October 15, 2026",
+    date: "2026-10-15",
+    hours: "10:00 AM–5:00 PM (11:00 AM–12:00 PM unavailable)",
+    times: halfHours(10 * 60, 17 * 60),
+    bookedTimes: ["11:00 AM", "11:30 AM"],
   },
   {
-    label: "Monday, October 12, 2026",
-    date: "2026-10-12",
-    hours: "8:00 AM–12:00 PM",
-    times: halfHours(8 * 60, 12 * 60),
-    bookedTimes: ["11:00 AM", "11:30 AM"],
+    label: "Friday, October 16, 2026",
+    date: "2026-10-16",
+    hours: "9:00–11:00 AM and 3:00–5:30 PM",
+    times: [...halfHours(9 * 60, 11 * 60), ...halfHours(15 * 60, 17 * 60 + 30)],
+    bookedTimes: [],
+  },
+  {
+    label: "Saturday, October 17, 2026",
+    date: "2026-10-17",
+    hours: "10:00 AM–5:00 PM",
+    times: halfHours(10 * 60, 17 * 60),
+    bookedTimes: [],
+  },
+  {
+    label: "Sunday, October 18, 2026",
+    date: "2026-10-18",
+    hours: "2:00–4:00 PM",
+    times: halfHours(14 * 60, 16 * 60),
+    bookedTimes: [],
   },
 ];
 

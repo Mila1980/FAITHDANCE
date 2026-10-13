@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
-import { bookingAvailability, bookingSlotKey, unavailableBookingSlotKeys } from "@/lib/booking-availability";
+import { areConsecutiveBookingSlots, bookingAvailability, bookingSlotKey, unavailableBookingSlotKeys } from "@/lib/booking-availability";
 
 type Slot = { key: string; label: string };
 
@@ -26,7 +26,7 @@ export function BookingSlotPicker() {
   const [booked, setBooked] = useState<string[]>([]);
   const [saving, setSaving] = useState(false);
   const [status, setStatus] = useState("");
-  const [sessionType, setSessionType] = useState("in-person-one");
+  const [sessionType, setSessionType] = useState("zoom-one");
   const [selectedDate, setSelectedDate] = useState("");
   const [startKey, setStartKey] = useState("");
   const [lessonBlocks, setLessonBlocks] = useState(1);
@@ -49,9 +49,11 @@ export function BookingSlotPicker() {
   );
   const startAvailability = daySlots.map((slot, index) => {
     const needed = daySlots.slice(index, index + lessonBlocks);
-    const blocked = needed.length !== lessonBlocks || needed.some((item) =>
-      unavailableBookingSlotKeys.has(item.key) || reservedSlots.has(item.key) || booked.includes(item.key),
-    );
+    const blocked = needed.length !== lessonBlocks
+      || !areConsecutiveBookingSlots(needed.map((item) => item.key))
+      || needed.some((item) =>
+        unavailableBookingSlotKeys.has(item.key) || reservedSlots.has(item.key) || booked.includes(item.key),
+      );
     return { ...slot, blocked };
   });
   const availableStarts = startAvailability.filter((slot) => !slot.blocked);
@@ -115,13 +117,13 @@ export function BookingSlotPicker() {
             <em>that works.</em>
           </h2>
           <p>
-            Choose an in-person date and time, then enter your details to reserve your lesson.
+            Choose a Zoom lesson date and time, then enter your details to reserve your lesson.
           </p>
           <label className="booking-session-label">
             Booking type
             <select value={sessionType} onChange={(event) => setSessionType(event.target.value)}>
-              <option value="in-person-one">In-person lesson: one dancer</option>
-              <option value="in-person-two">In-person lesson: two dancers</option>
+              <option value="zoom-one">Zoom lesson: one dancer</option>
+              <option value="zoom-two">Zoom lesson: two dancers</option>
             </select>
           </label>
         </div>
@@ -160,7 +162,7 @@ export function BookingSlotPicker() {
               }}>
                 <option value="">{selectedDate ? "Select an available time" : "Choose a date first"}</option>
                 {startAvailability.map((slot) => (
-                  <option key={slot.key} value={slot.key} disabled={slot.blocked} style={slot.blocked ? { textDecoration: "line-through" } : undefined}>{slot.time}{slot.blocked ? " (Booked)" : ""}</option>
+                  <option key={slot.key} value={slot.key} disabled={slot.blocked} style={slot.blocked ? { textDecoration: "line-through" } : undefined}>{slot.time}{slot.blocked ? " (Unavailable)" : ""}</option>
                 ))}
               </select>
             </label>

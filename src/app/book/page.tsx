@@ -3,10 +3,10 @@ import type { Metadata } from "next";
 import { BookingSlotPicker } from "@/components/booking-slot-picker";
 
 export const metadata: Metadata = {
-  title: "Book In-Person Dance Lessons | October 2026",
-  description: "Book an in-person dance lesson on October 9 or October 12, 2026. Choose an available half-hour slot.",
+  title: "Book Zoom Dance Lessons | October 2026",
+  description: "Book a private Zoom dance lesson on October 15–18, 2026. Choose an available half-hour start time.",
   alternates: { canonical: "/book" },
-  openGraph: { url: "/book", title: "Book In-Person Dance Lessons", description: "Choose an available half-hour dance lesson on October 9 or October 12, 2026." },
+  openGraph: { url: "/book", title: "Book Zoom Dance Lessons", description: "Choose an available half-hour start time for a private Zoom dance lesson on October 15–18, 2026." },
 };
 
 export default function BookPage() {
@@ -19,11 +19,16 @@ export default function BookPage() {
 
       <section className="booking-hero">
         <p className="eyebrow">Private dance lessons</p>
-        <h1>In-person dance lessons<br /><em>October 9 + 12</em></h1>
-        <p>Choose a half-hour appointment. Booked times are shown and cannot be selected.</p>
-        <div className="booking-dates"><div><span>Friday, October 9</span><strong>11:30 AM&ndash;3:00 PM</strong></div><div><span>Monday, October 12</span><strong>8:00 AM&ndash;12:00 PM</strong></div></div>
+        <h1>Private Zoom lessons<br /><em>October 15–18</em></h1>
+        <p>Choose a 30- or 60-minute Zoom lesson. Start times are available in half-hour increments; unavailable times cannot be selected.</p>
+        <div className="booking-dates">
+          <div><span>Thursday, October 15</span><strong>10:00 AM–5:00 PM</strong><small>11:00 AM–12:00 PM unavailable</small></div>
+          <div><span>Friday, October 16</span><strong>9:00–11:00 AM<br />3:00–5:30 PM</strong></div>
+          <div><span>Saturday, October 17</span><strong>10:00 AM–5:00 PM</strong></div>
+          <div><span>Sunday, October 18</span><strong>2:00–4:00 PM</strong></div>
+        </div>
         <div className="booking-fit">
-          <span>In-person lessons</span>
+          <span>Zoom lessons</span>
           <span>30 or 60 minutes</span>
           <span>One or two dancers</span>
         </div>
