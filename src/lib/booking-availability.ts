@@ -39,17 +39,24 @@ export function areConsecutiveBookingSlots(keys: string[]) {
 
 export const bookingAvailability: BookingDate[] = [
   {
-    label: "Saturday, October 24, 2026",
-    date: "2026-10-24",
-    hours: "12:00–8:00 PM",
-    times: halfHours(12 * 60, 20 * 60),
+    label: "Friday, October 30, 2026",
+    date: "2026-10-30",
+    hours: "4:00–5:30 PM",
+    times: halfHours(16 * 60, 17 * 60 + 30),
     bookedTimes: [],
   },
   {
-    label: "Sunday, October 25, 2026",
-    date: "2026-10-25",
-    hours: "3:00–8:00 PM",
-    times: halfHours(15 * 60, 20 * 60),
+    label: "Saturday, October 31, 2026",
+    date: "2026-10-31",
+    hours: "11:00 AM–5:00 PM",
+    times: halfHours(11 * 60, 17 * 60),
+    bookedTimes: [],
+  },
+  {
+    label: "Sunday, November 1, 2026",
+    date: "2026-11-01",
+    hours: "3:00–7:00 PM",
+    times: halfHours(15 * 60, 19 * 60),
     bookedTimes: [],
   },
 ];
