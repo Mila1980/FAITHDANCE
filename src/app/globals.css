@@ -165,3 +165,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 
 .availability-request { background: #fffaf5; display: grid; gap: clamp(2rem, 6vw, 6rem); grid-template-columns: .8fr 1.2fr; padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.5rem, 10vw, 11rem); }.availability-request h3 { color: var(--pink); font-size: clamp(2rem, 3.4vw, 3.5rem); margin: .65rem 0 1rem; }.availability-request > div > p:not(.eyebrow) { color: #a36f7c; font-size: .84rem; line-height: 1.7; max-width: 390px; }.availability-request form { display: grid; gap: .8rem; }.availability-request label { color: #bd748a; display: grid; font-size: .62rem; font-weight: 800; gap: .35rem; letter-spacing: .08em; text-transform: uppercase; }.availability-request input, .availability-request textarea { background: #fff7f2; border: 1px solid #efd5d2; box-sizing: border-box; color: #9d6172; font: .8rem Arial, sans-serif; padding: .75rem; resize: vertical; text-transform: none; width: 100%; }.availability-request form small { color: #a36f7c; font-size: .72rem; }
 @media (max-width: 720px) { .availability-request { grid-template-columns: 1fr; } }
+
+/* Center the single upcoming lesson announcement in its booking date block. */
+.booking-hero .booking-dates { grid-template-columns: minmax(0, 1fr); justify-items: center; }
+.booking-hero .booking-dates > div { width: 100%; text-align: center; justify-items: center; }
