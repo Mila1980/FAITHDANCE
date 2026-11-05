@@ -43,7 +43,7 @@ export const bookingAvailability: BookingDate[] = [
     date: "2026-11-08",
     hours: "3:00–8:00 PM",
     times: halfHours(15 * 60, 20 * 60),
-    bookedTimes: [],
+    bookedTimes: ['7:00 PM', '7:30 PM'],
   },
 ];
 
