@@ -39,7 +39,7 @@ export default function BookPage() {
         <h2>Worship Class · November 29</h2>
         <p>Sunday, 8:00–9:00 AM · $10 per person</p>
         <p>Group class registration is separate from private lesson time slots.</p>
-        <a className="button" href="mailto:hello@faithdance.com?subject=November%2029%20Worship%20Class%20Registration">Ask to join the worship class <span>→</span></a>
+        <a className="button" href="https://buy.stripe.com/3cI14nfs912R7TT7dQ3cc00">Register & pay $10 <span>→</span></a>
       </section>
       <BookingSlotPicker />
 
