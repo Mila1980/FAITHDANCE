@@ -37,9 +37,12 @@ export default function Home() {
 
       <section className="home-booking-banner" aria-label="Upcoming private lessons">
         <div>
-          <p className="eyebrow">Private Zoom dance lessons</p>
-          <h2>Upcoming lessons<br /><em>Sunday, November 8</em></h2>
-          <p>Sunday, November 8: 3:00–8:00 PM (Zoom)<br />Appointments start every half hour.</p>
+          <p className="eyebrow">November dance lessons</p>
+          <h2>Upcoming lessons<br /><em>Zoom &amp; in person</em></h2>
+          <p><strong>Zoom:</strong> November 15 · 9 AM–2 PM &amp; 3–7 PM; November 22 · 1:30–2 PM &amp; 3–7 PM</p>
+          <p><strong>In person at Laura Coté:</strong> November 25 · 8 AM–9 PM; November 26 · 8–11 AM; November 28 · 8–10 AM &amp; 11 AM–3 PM; November 29 · 9–10 AM</p>
+          <p><strong>Worship class:</strong> November 29 · 8–9 AM · $10 per person</p>
+          <p>Private lessons start every 30 minutes. Choose your lesson type and available time.</p>
         </div>
         <Link className="button" href="/book">Choose a time <span>→</span></Link>
       </section>
