@@ -3,10 +3,10 @@ import type { Metadata } from "next";
 import { BookingSlotPicker } from "@/components/booking-slot-picker";
 
 export const metadata: Metadata = {
-  title: "Book Zoom Dance Lessons | November 8, 2026",
-  description: "Book a private Zoom dance lesson on Sunday, November 8, 2026, from 3:00–8:00 PM. Choose an available half-hour start time.",
+  title: "Book November Dance Lessons | Zoom & In Person",
+  description: "Book November 2026 private Zoom or in-person dance lessons in 30-minute increments.",
   alternates: { canonical: "/book" },
-  openGraph: { url: "/book", title: "Book Zoom Dance Lessons", description: "Choose an available half-hour start time for a private Zoom dance lesson on Sunday, November 8, 2026." },
+  openGraph: { url: "/book", title: "Book November Dance Lessons", description: "Choose available half-hour start times for Zoom and in-person dance lessons." },
 };
 
 export default function BookPage() {
@@ -18,19 +18,29 @@ export default function BookPage() {
       </nav>
 
       <section className="booking-hero">
-        <p className="eyebrow">Private dance lessons</p>
-        <h1>Private Zoom lessons<br /><em>Sunday, November 8</em></h1>
-        <p>Choose a 30- or 60-minute Zoom lesson. Start times are available in half-hour increments; unavailable times cannot be selected.</p>
+        <p className="eyebrow">November 2026 · Private dance lessons</p>
+        <h1>Book your next<br /><em>dance lesson.</em></h1>
+        <p>Choose a 30- or 60-minute Zoom or in-person lesson. Start times are available every half hour, and unavailable times cannot be selected.</p>
         <div className="booking-dates">
-          <div><span>Sunday, November 8</span><strong>3:00–8:00 PM</strong><small>Zoom lessons</small></div>
+          <div><span>Zoom · Sunday, November 15</span><strong>9 AM–2 PM · 3–7 PM</strong><small>Online</small></div>
+          <div><span>Zoom · Sunday, November 22</span><strong>1:30–2 PM · 3–7 PM</strong><small>Online</small></div>
+          <div><span>In person · Wednesday, November 25</span><strong>8 AM–9 PM</strong><small>Laura Coté</small></div>
+          <div><span>In person · Thursday, November 26</span><strong>8–11 AM</strong><small>Laura Coté</small></div>
+          <div><span>In person · Saturday, November 28</span><strong>8–10 AM · 11 AM–3 PM</strong><small>Laura Coté</small></div>
+          <div><span>In person · Sunday, November 29</span><strong>9–10 AM</strong><small>Laura Coté</small></div>
         </div>
         <div className="booking-fit">
-          <span>Zoom lessons</span>
-          <span>30 or 60 minutes</span>
-          <span>One or two dancers</span>
+          <span>Zoom or in person</span><span>30 or 60 minutes</span><span>One or two dancers</span>
         </div>
       </section>
 
+      <section className="booking-review" aria-label="Worship class">
+        <p className="eyebrow">Special group class · Laura Coté</p>
+        <h2>Worship Class · November 29</h2>
+        <p>Sunday, 8:00–9:00 AM · $10 per person</p>
+        <p>Group class registration is separate from private lesson time slots.</p>
+        <a className="button" href="mailto:hello@faithdance.com?subject=November%2029%20Worship%20Class%20Registration">Ask to join the worship class <span>→</span></a>
+      </section>
       <BookingSlotPicker />
 
       <section className="session-pricing" aria-label="Private lesson prices">
