@@ -38,7 +38,8 @@ export function BookingSlotPicker() {
       .catch(() => undefined);
   }, []);
 
-  const chosenDay = bookingAvailability.find((day) => day.date === selectedDate);
+  const chosenDay = bookingAvailability.find((day) => day.date === selectedDate && day.mode === (sessionType.startsWith("zoom") ? "zoom" : "in-person"));
+  const matchingDays = bookingAvailability.filter((day) => day.mode === (sessionType.startsWith("zoom") ? "zoom" : "in-person"));
   const daySlots = useMemo(
     () => chosenDay?.times.map((time) => ({
       key: bookingSlotKey(chosenDay.date, time),
@@ -117,13 +118,15 @@ export function BookingSlotPicker() {
             <em>that works.</em>
           </h2>
           <p>
-            Choose a Zoom lesson date and time, then enter your details to reserve your lesson.
+            Choose a Zoom or in-person lesson date and time, then enter your details to reserve your lesson.
           </p>
           <label className="booking-session-label">
             Booking type
-            <select value={sessionType} onChange={(event) => setSessionType(event.target.value)}>
+            <select value={sessionType} onChange={(event) => { setSessionType(event.target.value); setSelectedDate(""); setStartKey(""); setStatus(""); }}>
               <option value="zoom-one">Zoom lesson: one dancer</option>
               <option value="zoom-two">Zoom lesson: two dancers</option>
+              <option value="in-person-one">In-person lesson: one dancer</option>
+              <option value="in-person-two">In-person lesson: two dancers</option>
             </select>
           </label>
         </div>
@@ -138,7 +141,7 @@ export function BookingSlotPicker() {
                 setStatus("");
               }}>
                 <option value="">Select a date</option>
-                {bookingAvailability.map((day) => (
+                {matchingDays.map((day) => (
                   <option key={day.date} value={day.date}>{day.label} · {day.hours}</option>
                 ))}
               </select>
