@@ -1,4 +1,5 @@
 export type BookingDate = {
+  mode: "zoom" | "in-person";
   label: string;
   date: string;
   hours: string;
@@ -38,13 +39,12 @@ export function areConsecutiveBookingSlots(keys: string[]) {
 }
 
 export const bookingAvailability: BookingDate[] = [
-  {
-    label: "Sunday, November 8, 2026",
-    date: "2026-11-08",
-    hours: "3:00–8:00 PM",
-    times: halfHours(15 * 60, 20 * 60),
-    bookedTimes: ['7:00 PM', '7:30 PM'],
-  },
+  { label: "Sunday, November 15, 2026", date: "2026-11-15", mode: "zoom", hours: "9:00 AM–2:00 PM, 3:00–7:00 PM", times: [...halfHours(9 * 60, 14 * 60), ...halfHours(15 * 60, 19 * 60)], bookedTimes: [] },
+  { label: "Sunday, November 22, 2026", date: "2026-11-22", mode: "zoom", hours: "1:30–2:00 PM, 3:00–7:00 PM", times: [...halfHours(13 * 60 + 30, 14 * 60), ...halfHours(15 * 60, 19 * 60)], bookedTimes: [] },
+  { label: "Wednesday, November 25, 2026", date: "2026-11-25", mode: "in-person", hours: "8:00 AM–9:00 PM", times: halfHours(8 * 60, 21 * 60), bookedTimes: [] },
+  { label: "Thursday, November 26, 2026", date: "2026-11-26", mode: "in-person", hours: "8:00–11:00 AM", times: halfHours(8 * 60, 11 * 60), bookedTimes: [] },
+  { label: "Saturday, November 28, 2026", date: "2026-11-28", mode: "in-person", hours: "8:00–10:00 AM, 11:00 AM–3:00 PM", times: [...halfHours(8 * 60, 10 * 60), ...halfHours(11 * 60, 15 * 60)], bookedTimes: [] },
+  { label: "Sunday, November 29, 2026", date: "2026-11-29", mode: "in-person", hours: "9:00–10:00 AM", times: halfHours(9 * 60, 10 * 60), bookedTimes: [] },
 ];
 
 export const validBookingSlotKeys = bookingAvailability.flatMap((day) =>
